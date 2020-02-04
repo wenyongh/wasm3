@@ -3441,7 +3441,6 @@ op_Select_f64_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
 static inline m3ret_t
 op_Return (pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
-    ;
     return NULL;
 }
 
@@ -6496,8 +6495,10 @@ const M3OpInfo c_operations [] =
 M3Result Compile_BlockStatements (IM3Compilation o)
 {
     M3Result result = m3Err_none;
-    while (o->wasm < o->wasmEnd) { emit_stack_dump (o);
-        u8 opcode = * (o->wasm++); log_opcode (o, opcode);
+    while (o->wasm < o->wasmEnd) {
+        emit_stack_dump (o);
+        u8 opcode = * (o->wasm++);
+        log_opcode (o, opcode);
         const M3OpInfo * op = & c_operations [opcode];
         M3Compiler compiler = op->compiler;
         if (! compiler)
