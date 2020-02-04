@@ -8,11 +8,13 @@
 #ifndef m3_core_h
 #define m3_core_h
 
+#if 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
+#endif
 
 #include "wasm3.h"
 #include "m3_config.h"

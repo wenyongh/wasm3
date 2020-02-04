@@ -13,9 +13,11 @@
 #define M3_VERSION_REV   5
 #define M3_VERSION       "0.4.5"
 
+#if 1
 #include <stdlib.h>
 #include <stdint.h>
 #include <inttypes.h>
+#endif
 
 #if defined(__cplusplus)
 extern "C" {

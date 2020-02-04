@@ -10,8 +10,10 @@
 
 #include "m3_core.h"
 
+#if 1
 #include <math.h>
 #include <limits.h>
+#endif
 
 #if defined(M3_COMPILER_MSVC)
 

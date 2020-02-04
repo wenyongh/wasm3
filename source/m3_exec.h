@@ -26,8 +26,10 @@
 #include "m3_exec_defs.h"
 #include "m3_math_utils.h"
 
+#if 1
 #include <math.h>
 #include <limits.h>
+#endif
 
 # define rewrite_op(OP)             * ((void **) (_pc-1)) = (void*)(OP)
 
