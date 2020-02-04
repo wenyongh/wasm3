@@ -157,8 +157,10 @@ typedef struct M3CodePageHeader
 M3CodePageHeader;
 static const char * const c_waTypes [] = { "nil", "i32", "i64", "f32", "f64", "void", "void *" };
 static const char * const c_waCompactTypes [] = { "0", "i", "I", "f", "F", "v", "*" };
+
 M3Result m3Error (M3Result i_result, IM3Runtime i_runtime, IM3Module i_module, IM3Function i_function,
                   const char * const i_file, u32 i_lineNum, const char * const i_errorMessage, ...);
+
 void m3Abort (const char* message);
 void m3NotImplemented (void);
 void m3Yield (void);
@@ -1610,7 +1612,7 @@ op_u32_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 / operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i32_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1641,7 +1643,7 @@ op_i32_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 / operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_u64_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1672,7 +1674,7 @@ op_u64_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 / operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i64_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1703,7 +1705,7 @@ op_i64_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 / operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_u32_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1734,7 +1736,7 @@ op_u32_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 % operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i32_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1765,7 +1767,7 @@ op_i32_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 % operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_u64_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1796,7 +1798,7 @@ op_u64_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 % operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i64_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1827,7 +1829,7 @@ op_i64_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand1 % operand2;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Min_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1852,7 +1854,7 @@ op_f32_Min_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = min_f32((operand1), (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Max_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1877,7 +1879,7 @@ op_f32_Max_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = max_f32((operand1), (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Min_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1902,7 +1904,7 @@ op_f64_Min_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = min_f64((operand1), (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Max_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1927,7 +1929,7 @@ op_f64_Max_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = max_f64((operand1), (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_CopySign_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1952,7 +1954,7 @@ op_f32_CopySign_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = copysignf((operand1), (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_CopySign_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1977,7 +1979,7 @@ op_f64_CopySign_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = copysign((operand1), (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Abs_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1992,7 +1994,7 @@ op_f32_Abs_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = fabsf(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Abs_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2007,7 +2009,7 @@ op_f64_Abs_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = fabs(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Ceil_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2022,7 +2024,7 @@ op_f32_Ceil_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ceilf(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Ceil_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2037,7 +2039,7 @@ op_f64_Ceil_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ceil(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Floor_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2052,7 +2054,7 @@ op_f32_Floor_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = floorf(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Floor_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2067,7 +2069,7 @@ op_f64_Floor_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = floor(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Trunc_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2082,7 +2084,7 @@ op_f32_Trunc_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = truncf(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Trunc_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2097,7 +2099,7 @@ op_f64_Trunc_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = trunc(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Sqrt_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2112,7 +2114,7 @@ op_f32_Sqrt_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = sqrtf(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Sqrt_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2127,7 +2129,7 @@ op_f64_Sqrt_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = sqrt(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Nearest_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2142,7 +2144,7 @@ op_f32_Nearest_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = rintf(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Nearest_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2157,7 +2159,7 @@ op_f64_Nearest_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = rint(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Negate_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2172,7 +2174,7 @@ op_f32_Negate_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = -(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Negate_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2187,7 +2189,7 @@ op_f64_Negate_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = -(operand);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i32_EqualToZero_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2753,7 +2755,7 @@ op_i64_Extend_i32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     i32 from = * (i32 *) (_sp + * ((i32 *) _pc++));
     _r0 = (i64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i64_Extend_u32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2768,7 +2770,7 @@ op_i64_Extend_u32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     u32 from = * (u32 *) (_sp + * ((i32 *) _pc++));
     _r0 = (i64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Demote_f64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2783,7 +2785,7 @@ op_f32_Demote_f64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     f64 from = * (f64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Promote_f32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2798,7 +2800,7 @@ op_f64_Promote_f32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     f32 from = * (f32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Convert_i32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2828,7 +2830,7 @@ op_f64_Convert_i32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i32 from = * (i32 *) (_sp + * ((i32 *) _pc++));
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Convert_u32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2858,7 +2860,7 @@ op_f64_Convert_u32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u32 from = * (u32 *) (_sp + * ((i32 *) _pc++));
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Convert_i64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2888,7 +2890,7 @@ op_f64_Convert_i64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i64 from = * (i64 *) (_sp + * ((i32 *) _pc++));
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f64_Convert_u64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2918,7 +2920,7 @@ op_f64_Convert_u64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u64 from = * (u64 *) (_sp + * ((i32 *) _pc++));
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Convert_i32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2948,7 +2950,7 @@ op_f32_Convert_i32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i32 from = * (i32 *) (_sp + * ((i32 *) _pc++));
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Convert_u32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2978,7 +2980,7 @@ op_f32_Convert_u32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u32 from = * (u32 *) (_sp + * ((i32 *) _pc++));
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Convert_i64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3008,7 +3010,7 @@ op_f32_Convert_i64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i64 from = * (i64 *) (_sp + * ((i32 *) _pc++));
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_f32_Convert_u64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3038,7 +3040,7 @@ op_f32_Convert_u64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u64 from = * (u64 *) (_sp + * ((i32 *) _pc++));
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-};
+}
 
 static inline m3ret_t
 op_i32_Reinterpret_f32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3571,8 +3573,7 @@ op_Const (pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 
 static inline m3ret_t
 op_Unreachable (pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
-{ {};
-    ;
+{
     return m3Err_trapUnreachable;
 }
 
@@ -3666,7 +3667,7 @@ op_f32_Load_f32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_f64_Load_f64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3700,7 +3701,7 @@ op_f64_Load_f64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i32_Load_i8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3734,7 +3735,7 @@ op_i32_Load_i8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i32_Load_u8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3768,7 +3769,7 @@ op_i32_Load_u8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i32_Load_i16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3802,7 +3803,7 @@ op_i32_Load_i16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i32_Load_u16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3836,7 +3837,7 @@ op_i32_Load_u16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i32_Load_i32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3870,7 +3871,7 @@ op_i32_Load_i32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_i8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3904,7 +3905,7 @@ op_i64_Load_i8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_u8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3938,7 +3939,7 @@ op_i64_Load_u8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_i16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3972,7 +3973,7 @@ op_i64_Load_i16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_u16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4006,7 +4007,7 @@ op_i64_Load_u16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_i32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4040,7 +4041,7 @@ op_i64_Load_i32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_u32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4074,7 +4075,7 @@ op_i64_Load_u32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i64_Load_i64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4108,7 +4109,7 @@ op_i64_Load_i64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_f32_Store_f32_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4174,7 +4175,7 @@ op_f32_Store_f32_rr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_f64_Store_f64_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4240,7 +4241,7 @@ op_f64_Store_f64_rr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-};
+}
 
 static inline m3ret_t
 op_i32_Store_u8_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4837,22 +4838,45 @@ void log_opcode (IM3Compilation o, u8 i_opcode);
 const char * get_indention_string (IM3Compilation o);
 void emit_stack_dump (IM3Compilation o);
 void log_emit (IM3Compilation o, IM3Operation i_operation);
-static const IM3Operation c_setSetOps [] = { NULL, op_SetSlot_i32, op_SetSlot_i64, op_SetSlot_f32, op_SetSlot_f64 };
+
+static const IM3Operation c_setSetOps [] = {
+    NULL,
+    op_SetSlot_i32,
+    op_SetSlot_i64,
+    op_SetSlot_f32,
+    op_SetSlot_f64
+};
+
 void ReleaseCompilationCodePage (IM3Compilation o)
 {
     ReleaseCodePage (o->runtime, o->page);
 }
+
 bool IsStackPolymorphic (IM3Compilation o)
 {
     return o->block.isPolymorphic;
 }
-bool IsRegisterLocation (i16 i_location) { return (i_location >= 2000 + 1); }
-bool IsFpRegisterLocation (i16 i_location) { return (i_location == 2000 + 2); }
-bool IsIntRegisterLocation (i16 i_location) { return (i_location == 2000 + 1); }
+
+bool IsRegisterLocation (i16 i_location)
+{
+    return (i_location >= 2000 + 1);
+}
+
+bool IsFpRegisterLocation (i16 i_location)
+{
+    return (i_location == 2000 + 2);
+}
+
+bool IsIntRegisterLocation (i16 i_location)
+{
+    return (i_location == 2000 + 1);
+}
+
 i16 GetStackTopIndex (IM3Compilation o)
 {
     return o->stackIndex - 1;
 }
+
 u8 GetStackTopTypeAtOffset (IM3Compilation o, u16 i_offset)
 {
     u8 type = c_m3Type_none;
@@ -4861,10 +4885,12 @@ u8 GetStackTopTypeAtOffset (IM3Compilation o, u16 i_offset)
         type = o->typeStack [o->stackIndex - i_offset];
     return type;
 }
+
 u8 GetStackTopType (IM3Compilation o)
 {
     return GetStackTopTypeAtOffset (o, 0);
 }
+
 u8 GetStackBottomType (IM3Compilation o, u16 i_offset)
 {
     u8 type = c_m3Type_none;
@@ -4872,66 +4898,76 @@ u8 GetStackBottomType (IM3Compilation o, u16 i_offset)
         type = o->typeStack [i_offset];
     return type;
 }
+
 u8 GetBlockType (IM3Compilation o)
 {
     return o->block.type;
 }
+
 bool BlockHasType (IM3Compilation o)
 {
     return GetBlockType (o) != c_m3Type_none;
 }
+
 i16 GetNumBlockValues (IM3Compilation o)
 {
     return o->stackIndex - o->block.initStackIndex;
 }
+
 bool IsStackTopInRegister (IM3Compilation o)
 {
-    i16 i = GetStackTopIndex (o); ;
-    if (i >= 0)
-    {
+    i16 i = GetStackTopIndex (o);
+    if (i >= 0) {
         return (o->wasmStack [i] >= 2000 + 1);
     }
-    else return false;
+    else
+        return false;
 }
+
 bool IsStackTopInSlot (IM3Compilation o)
 {
     return ! IsStackTopInRegister (o);
 }
+
 static const u16 c_slotUnused = 0xffff;
+
 u16 GetStackTopSlotIndex (IM3Compilation o)
 {
-    i16 i = GetStackTopIndex (o); ;
+    i16 i = GetStackTopIndex (o);
     u16 slot = c_slotUnused;
     if (i >= 0)
         slot = o->wasmStack [i];
     return slot;
 }
+
 bool IsValidSlot (u16 i_slot)
 {
     return (i_slot < 2000);
 }
+
 bool IsStackTopMinus1InRegister (IM3Compilation o)
 {
     i16 i = GetStackTopIndex (o);
-    if (i > 0)
-    {
+    if (i > 0) {
         return (o->wasmStack [i - 1] >= 2000 + 1);
     }
-    else return false;
+    else
+        return false;
 }
+
 void MarkSlotAllocated (IM3Compilation o, u16 i_slot)
-{ ;
+{
     o->m3Slots [i_slot] = 1;
     o->numAllocatedExecSlots++;
 }
+
 bool AllocateSlot (IM3Compilation o, u16 * o_execSlot)
 {
     bool found = false;
     i16 i = o->firstSlotIndex;
-    while (i < 2000)
-    {
-        if (o->m3Slots [i] == 0)
-        {
+
+    while (i < 2000) {
+        if (o->m3Slots [i] == 0) {
             MarkSlotAllocated (o, i);
             * o_execSlot = i;
             found = true;
@@ -4941,51 +4977,56 @@ bool AllocateSlot (IM3Compilation o, u16 * o_execSlot)
     }
     return found;
 }
+
 M3Result IncrementSlotUsageCount (IM3Compilation o, u16 i_slot)
-{ ;
-    M3Result result = m3Err_none; ;
+{
+    M3Result result = m3Err_none;
     if (o->m3Slots [i_slot] < 0xFF)
     {
         o->m3Slots [i_slot]++;
     }
-    else result = "slot usage count overflow";
+    else
+        result = "slot usage count overflow";
     return result;
 }
+
 void DeallocateSlot (IM3Compilation o, i16 i_slotIndex)
-{ ;
-                                                                                        ;
+{
     if (-- o->m3Slots [i_slotIndex] == 0)
          o->numAllocatedExecSlots--;
 }
+
 bool IsRegisterAllocated (IM3Compilation o, u32 i_register)
 {
     return (o->regStackIndexPlusOne [i_register] != c_m3RegisterUnallocated);
 }
+
 bool IsRegisterTypeAllocated (IM3Compilation o, u8 i_type)
 {
     return IsRegisterAllocated (o, IsFpType (i_type));
 }
+
 void AllocateRegister (IM3Compilation o, u32 i_register, u16 i_stackIndex)
 {
-    ;
     o->regStackIndexPlusOne [i_register] = i_stackIndex + 1;
 }
+
 void DeallocateRegister (IM3Compilation o, u32 i_register)
 {
-    ;
     o->regStackIndexPlusOne [i_register] = c_m3RegisterUnallocated;
 }
+
 u16 GetRegisterStackIndex (IM3Compilation o, u32 i_register)
 {
-    ;
     return o->regStackIndexPlusOne [i_register] - 1;
 }
+
 u16 GetMaxExecSlot (IM3Compilation o)
 {
     u16 i = o->firstSlotIndex;
     u32 allocated = o->numAllocatedExecSlots;
-    while (i < 2000)
-    {
+
+    while (i < 2000) {
         if (allocated == 0)
             break;
         if (o->m3Slots [i])
@@ -4994,195 +5035,223 @@ u16 GetMaxExecSlot (IM3Compilation o)
     }
     return i;
 }
+
 M3Result PreserveRegisterIfOccupied (IM3Compilation o, u8 i_registerType)
 {
     M3Result result = m3Err_none;
     u32 regSelect = IsFpType (i_registerType);
-    if (IsRegisterAllocated (o, regSelect))
-    {
+
+    if (IsRegisterAllocated (o, regSelect)) {
         u16 stackIndex = GetRegisterStackIndex (o, regSelect);
         DeallocateRegister (o, regSelect);
         u16 slot;
-        if (AllocateSlot (o, & slot))
-        {
+        if (AllocateSlot (o, & slot)) {
             o->wasmStack [stackIndex] = slot;
             u8 type = o->typeStack [stackIndex];
-{ result = EmitOp (o, c_setSetOps [type]); if (result) { ; goto _catch; } };
+            result = EmitOp (o, c_setSetOps [type]);
+            if (result) { goto _catch; }
             EmitSlotOffset (o, slot);
         }
-        else { result = m3Err_functionStackOverflow; ; goto _catch; };
+        else {
+            result = m3Err_functionStackOverflow;
+            goto _catch;
+        }
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result PreserveRegisters (IM3Compilation o)
 {
     M3Result result;
-{ result = PreserveRegisterIfOccupied (o, c_m3Type_f64); if (result) { ; goto _catch; } };
-{ result = PreserveRegisterIfOccupied (o, c_m3Type_i64); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = PreserveRegisterIfOccupied (o, c_m3Type_f64);
+    if (result) { goto _catch; }
+    result = PreserveRegisterIfOccupied (o, c_m3Type_i64);
+    if (result) { goto _catch; }
+_catch:
+    return result;
 }
+
 M3Result PreserveNonTopRegisters (IM3Compilation o)
 {
     M3Result result = m3Err_none;
     i16 stackTop = GetStackTopIndex (o);
-    if (stackTop >= 0)
-    {
-        if (IsRegisterAllocated (o, 0))
-        {
-            if (GetRegisterStackIndex (o, 0) != stackTop)
-{ result = PreserveRegisterIfOccupied (o, c_m3Type_i64); if (result) { ; goto _catch; } };
+
+    if (stackTop >= 0) {
+        if (IsRegisterAllocated (o, 0)) {
+            if (GetRegisterStackIndex (o, 0) != stackTop) {
+                result = PreserveRegisterIfOccupied (o, c_m3Type_i64);
+                if (result) { goto _catch; }
+            }
         }
-        if (IsRegisterAllocated (o, 1))
-        {
-            if (GetRegisterStackIndex (o, 1) != stackTop)
-{ result = PreserveRegisterIfOccupied (o, c_m3Type_f64); if (result) { ; goto _catch; } };
+
+        if (IsRegisterAllocated (o, 1)) {
+            if (GetRegisterStackIndex (o, 1) != stackTop) {
+                result = PreserveRegisterIfOccupied (o, c_m3Type_f64);
+                if (result) { goto _catch; }
+            }
         }
     }
-    _catch: return result;
+    _catch:
+    return result;
 }
+
 M3Result Push (IM3Compilation o, u8 i_m3Type, i16 i_location)
 {
     M3Result result = m3Err_none;
     u16 stackIndex = o->stackIndex++;
-    if (stackIndex < 2000)
-    {
-        if (o->function)
-        {
+
+    if (stackIndex < 2000) {
+        if (o->function) {
             if (stackIndex > o->function->maxStackSlots)
                 o->function->maxStackSlots = stackIndex;
         }
         o->wasmStack [stackIndex] = i_location;
         o->typeStack [stackIndex] = i_m3Type;
-        if (IsRegisterLocation (i_location))
-        {
+        if (IsRegisterLocation (i_location)) {
             u32 regSelect = IsFpRegisterLocation (i_location);
             AllocateRegister (o, regSelect, stackIndex);
-        } {}
+        }
     }
-    else result = m3Err_functionStackOverflow;
+    else
+        result = m3Err_functionStackOverflow;
     return result;
 }
+
 M3Result PushRegister (IM3Compilation o, u8 i_m3Type)
 {
-    i16 location = IsFpType (i_m3Type) ? 2000 + 2 : 2000 + 1; ;
+    i16 location = IsFpType (i_m3Type) ? 2000 + 2 : 2000 + 1;
     return Push (o, i_m3Type, location);
 }
+
 M3Result Pop (IM3Compilation o)
 {
     M3Result result = m3Err_none;
-    if (o->stackIndex > o->block.initStackIndex)
-    {
+    if (o->stackIndex > o->block.initStackIndex) {
         o->stackIndex--;
         i16 location = o->wasmStack [o->stackIndex];
-        if (IsRegisterLocation (location))
-        {
+        if (IsRegisterLocation (location)) {
             u32 regSelect = IsFpRegisterLocation (location);
             DeallocateRegister (o, regSelect);
         }
-        else if (location >= o->firstSlotIndex)
-        {
+        else if (location >= o->firstSlotIndex) {
             DeallocateSlot (o, location);
         }
-        {}
     }
     else if (! IsStackPolymorphic (o))
         result = m3Err_functionStackUnderrun;
     return result;
 }
+
 M3Result UnwindBlockStack (IM3Compilation o)
 {
     M3Result result = m3Err_none;
     i16 initStackIndex = o->block.initStackIndex;
     u32 popCount = 0;
-    while (o->stackIndex > initStackIndex )
-    {
-{ result = Pop (o); if (result) { ; goto _catch; } };
+
+    while (o->stackIndex > initStackIndex) {
+        result = Pop (o);
+        if (result) { goto _catch; }
         ++popCount;
     }
-    if (popCount)
-        {};
-    _catch: return result;
+    if (popCount) {}
+
+    _catch:
+    return result;
 }
+
 M3Result _PushAllocatedSlotAndEmit (IM3Compilation o, u8 i_m3Type, bool i_doEmit)
 {
     M3Result result = m3Err_none;
     u16 slot;
-    if (AllocateSlot (o, & slot))
-    {
-{ result = Push (o, i_m3Type, slot); if (result) { ; goto _catch; } };
+
+    if (AllocateSlot (o, & slot)) {
+        result = Push (o, i_m3Type, slot);
+        if (result) { goto _catch; }
         if (i_doEmit)
             EmitSlotOffset (o, slot);
     }
-    else result = m3Err_functionStackOverflow;
-    _catch: return result;
+    else
+        result = m3Err_functionStackOverflow;
+    _catch:
+    return result;
 }
+
 M3Result PushAllocatedSlotAndEmit (IM3Compilation o, u8 i_m3Type)
 {
     return _PushAllocatedSlotAndEmit (o, i_m3Type, true);
 }
+
 M3Result PushAllocatedSlot (IM3Compilation o, u8 i_m3Type)
 {
     return _PushAllocatedSlotAndEmit (o, i_m3Type, false);
 }
+
 M3Result PushConst (IM3Compilation o, u64 i_word, u8 i_m3Type)
 {
     M3Result result = m3Err_none;
     i16 location = -1;
     u32 numConstants = o->constSlotIndex - o->firstConstSlotIndex;
-    for (u32 i = 0; i < numConstants; ++i)
-    {
-        if (o->constants [i] == i_word)
-        {
+
+    for (u32 i = 0; i < numConstants; ++i) {
+        if (o->constants [i] == i_word) {
             location = o->firstConstSlotIndex + i;
-{ result = Push (o, i_m3Type, location); if (result) { ; goto _catch; } };
+            result = Push (o, i_m3Type, location);
+            if (result) { goto _catch; }
             break;
         }
     }
-    if (location < 0)
-    {
-        if (o->constSlotIndex < o->firstSlotIndex)
-        {
+
+    if (location < 0) {
+        if (o->constSlotIndex < o->firstSlotIndex) {
             o->constants [numConstants] = i_word;
             location = o->constSlotIndex++;
-{ result = Push (o, i_m3Type, location); if (result) { ; goto _catch; } };
+            result = Push (o, i_m3Type, location);
+            if (result) { goto _catch; }
         }
-        else
-        {
-{ result = EmitOp (o, op_Const); if (result) { ; goto _catch; } };
+        else {
+            result = EmitOp (o, op_Const);
+            if (result) { goto _catch; }
             EmitConstant64 (o, i_word);
-{ result = PushAllocatedSlotAndEmit (o, i_m3Type); if (result) { ; goto _catch; } };
+            result = PushAllocatedSlotAndEmit (o, i_m3Type);
+            if (result) { goto _catch; }
         }
     }
-    _catch: return result;
+    _catch:
+    return result;
 }
+
 M3Result EmitTopSlotAndPop (IM3Compilation o)
 {
     if (IsStackTopInSlot (o))
         EmitSlotOffset (o, GetStackTopSlotIndex (o));
     return Pop (o);
 }
+
 M3Result AddTrapRecord (IM3Compilation o)
 {
     M3Result result = m3Err_none;
-    if (o->function)
-    {
-    }
+    if (o->function) {}
     return result;
 }
+
 M3Result AcquirePatch (IM3Compilation o, IM3BranchPatch * o_patch)
 {
     M3Result result = m3Err_none;
     IM3BranchPatch patch = o->releasedPatches;
-    if (patch)
-    {
+    if (patch) {
         o->releasedPatches = patch->next;
         patch->next = NULL;
     }
-    else
-{ result = m3Malloc ((void **) & patch, sizeof (M3BranchPatch) * (1)); if (result) { ; goto _catch; } };
+    else {
+        result = m3Malloc ((void **) & patch, sizeof (M3BranchPatch) * (1));
+        if (result) { goto _catch; }
+    }
     * o_patch = patch;
-    _catch: return result;
+    _catch:
+    return result;
 }
+
 bool PatchBranches (IM3Compilation o)
 {
     bool didPatch = false;
@@ -5190,14 +5259,12 @@ bool PatchBranches (IM3Compilation o)
     pc_t pc = GetPC (o);
     IM3BranchPatch patches = block->patches;
     IM3BranchPatch endPatch = patches;
-    while (patches)
-    { {};
+    while (patches) {
         * (patches->location) = pc;
         endPatch = patches;
         patches = patches->next;
     }
-    if (block->patches)
-    { ;
+    if (block->patches) {
         endPatch->next = o->releasedPatches;
         o->releasedPatches = block->patches;
         block->patches = NULL;
@@ -5205,54 +5272,77 @@ bool PatchBranches (IM3Compilation o)
     }
     return didPatch;
 }
+
 M3Result CopyTopSlot (IM3Compilation o, u16 i_destSlot)
 {
     M3Result result = m3Err_none;
     IM3Operation op;
     u8 type = GetStackTopType (o);
-    if (IsStackTopInRegister (o))
-    {
+    if (IsStackTopInRegister (o)) {
         op = c_setSetOps [type];
     }
-    else op = Is64BitType (type) ? op_CopySlot_64 : op_CopySlot_32;
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
+    else
+        op = Is64BitType (type) ? op_CopySlot_64 : op_CopySlot_32;
+    result = EmitOp (o, op);
+    if (result) { goto _catch; }
     EmitSlotOffset (o, i_destSlot);
     if (IsStackTopInSlot (o))
         EmitSlotOffset (o, GetStackTopSlotIndex (o));
-    _catch: return result;
+    _catch:
+    return result;
 }
+
 M3Result PreservedCopyTopSlot (IM3Compilation o, u16 i_destSlot, u16 i_preserveSlot)
 {
-    M3Result result = m3Err_none; ;
+    M3Result result = m3Err_none;
     IM3Operation op;
     u8 type = GetStackTopType (o);
-    if (IsStackTopInRegister (o))
-    {
-        const IM3Operation c_preserveSetSlot [] = { NULL, op_PreserveSetSlot_i32, op_PreserveSetSlot_i64, op_PreserveSetSlot_f32, op_PreserveSetSlot_f64 };
+    if (IsStackTopInRegister (o)) {
+        const IM3Operation c_preserveSetSlot [] = {
+            NULL,
+            op_PreserveSetSlot_i32,
+            op_PreserveSetSlot_i64,
+            op_PreserveSetSlot_f32,
+            op_PreserveSetSlot_f64
+        };
         op = c_preserveSetSlot [type];
     }
-    else op = Is64BitType (type) ? op_PreserveCopySlot_64 : op_PreserveCopySlot_32;
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
+    else
+        op = Is64BitType (type) ? op_PreserveCopySlot_64 : op_PreserveCopySlot_32;
+    result = EmitOp (o, op);
+    if (result) { goto _catch; }
     EmitSlotOffset (o, i_destSlot);
     if (IsStackTopInSlot (o))
         EmitSlotOffset (o, GetStackTopSlotIndex (o));
     EmitSlotOffset (o, i_preserveSlot);
-    _catch: return result;
+    _catch:
+    return result;
 }
+
 M3Result MoveStackTopToRegister (IM3Compilation o)
 {
     M3Result result = m3Err_none;
-    if (IsStackTopInSlot (o))
-    {
+    if (IsStackTopInSlot (o)) {
         u8 type = GetStackTopType (o);
-        static const IM3Operation setRegisterOps [] = { NULL, op_SetRegister_i32, op_SetRegister_i64, op_SetRegister_f32, op_SetRegister_f64 };
+        static const IM3Operation setRegisterOps [] = {
+            NULL,
+            op_SetRegister_i32,
+            op_SetRegister_i64,
+            op_SetRegister_f32,
+            op_SetRegister_f64
+        };
         IM3Operation op = setRegisterOps [type];
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
-{ result = EmitTopSlotAndPop (o); if (result) { ; goto _catch; } };
-{ result = PushRegister (o, type); if (result) { ; goto _catch; } };
+        result = EmitOp (o, op);
+        if (result) { goto _catch; }
+        result = EmitTopSlotAndPop (o);
+        if (result) { goto _catch; }
+        result = PushRegister (o, type); 
+        if (result) { goto _catch; }
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result ReturnStackTop (IM3Compilation o)
 {
     M3Result result = m3Err_none;
@@ -5267,40 +5357,42 @@ M3Result ReturnStackTop (IM3Compilation o)
         result = m3Err_functionStackUnderrun;
     return result;
 }
+
 M3Result FindReferencedLocalWithinCurrentBlock (IM3Compilation o, u16 * o_preservedSlotIndex, u32 i_localIndex)
 {
     M3Result result = m3Err_none;
     IM3CompilationScope scope = & o->block;
     i16 startIndex = scope->initStackIndex;
-    while (scope->opcode == c_waOp_block)
-    {
+    while (scope->opcode == c_waOp_block) {
         scope = scope->outer;
         if (! scope)
             break;
         startIndex = scope->initStackIndex;
     }
     * o_preservedSlotIndex = (u16) i_localIndex;
-    for (u32 i = startIndex; i < o->stackIndex; ++i)
-    {
-        if (o->wasmStack [i] == i_localIndex)
-        {
-            if (* o_preservedSlotIndex == i_localIndex)
-            {
-                if (! AllocateSlot (o, o_preservedSlotIndex))
-                    { result = m3Err_functionStackOverflow; ; goto _catch; };
+    for (u32 i = startIndex; i < o->stackIndex; ++i) {
+        if (o->wasmStack [i] == i_localIndex) {
+            if (* o_preservedSlotIndex == i_localIndex) {
+                if (! AllocateSlot (o, o_preservedSlotIndex)) {
+                        result = m3Err_functionStackOverflow;
+                        goto _catch;
+                }
             }
-            else
-{ result = IncrementSlotUsageCount (o, * o_preservedSlotIndex); if (result) { ; goto _catch; } };
+            else {
+                result = IncrementSlotUsageCount (o, * o_preservedSlotIndex);
+                if (result) { goto _catch; }
+            }
             o->wasmStack [i] = * o_preservedSlotIndex;
         }
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result GetBlockScope (IM3Compilation o, IM3CompilationScope * o_scope, i32 i_depth)
 {
     IM3CompilationScope scope = & o->block;
-    while (i_depth--)
-    {
+    while (i_depth--) {
         scope = scope->outer;
         if (! scope)
             return "invalid block depth";
@@ -5308,398 +5400,566 @@ M3Result GetBlockScope (IM3Compilation o, IM3CompilationScope * o_scope, i32 i_d
     * o_scope = scope;
     return m3Err_none;
 }
+
 M3Result Compile_Const_i32 (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     i32 value;
-{ result = ReadLEB_i32 (& value, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } }; {};
-{ result = PushConst (o, value, c_m3Type_i32); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = ReadLEB_i32 (& value, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+    result = PushConst (o, value, c_m3Type_i32);
+    if (result) { goto _catch; }
+_catch:
+    return result;
 }
+
 M3Result Compile_Const_i64 (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     i64 value;
-{ result = ReadLEB_i64 (& value, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } }; {};
-{ result = PushConst (o, value, c_m3Type_i64); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = ReadLEB_i64 (& value, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+    result = PushConst (o, value, c_m3Type_i64);
+    if (result) { goto _catch; }
+_catch:
+    return result;
 }
+
 M3Result Compile_Const_f32 (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     f32 value;
-{ result = Read_f32 (& value, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } }; {};
+    result = Read_f32 (& value, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
     union { u64 u; f32 f; } union64;
     union64.f = value;
-{ result = PushConst (o, union64.u, c_m3Type_f32); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = PushConst (o, union64.u, c_m3Type_f32);
+    if (result) { goto _catch; }
+_catch:
+    return result;
 }
+
 M3Result Compile_Const_f64 (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     f64 value;
-{ result = Read_f64 (& value, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } }; {};
+    result = Read_f64 (& value, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
     union { u64 u; f64 f; } union64;
     union64.f = value;
-{ result = PushConst (o, union64.u, c_m3Type_f64); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = PushConst (o, union64.u, c_m3Type_f64);
+    if (result) { goto _catch; }
+_catch:
+    return result;
 }
+
 M3Result Compile_Return (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     bool hasReturn = GetFunctionNumReturns (o->function);
-    if (hasReturn)
-    {
-{ result = ReturnStackTop (o); if (result) { ; goto _catch; } };
-{ result = Pop (o); if (result) { ; goto _catch; } };
+    if (hasReturn) {
+        result = ReturnStackTop (o);
+        if (result) { goto _catch; }
+        result = Pop (o);
+        if (result) { goto _catch; }
     }
-{ result = EmitOp (o, op_Return); if (result) { ; goto _catch; } };
+    result = EmitOp (o, op_Return);
+    if (result) { goto _catch; }
     o->block.isPolymorphic = true;
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result Compile_End (IM3Compilation o, u8 i_opcode)
 {
     M3Result result = m3Err_none;
-    if (o->block.depth == 0)
-    {
+    if (o->block.depth == 0) {
         u8 valueType = o->block.type;
-        if (valueType)
-        {
+        if (valueType) {
             if (IsStackTopInRegister (o))
                 PatchBranches (o);
-{ result = ReturnStackTop (o); if (result) { ; goto _catch; } };
+
+            result = ReturnStackTop (o);
+            if (result) { goto _catch; }
         }
-        else PatchBranches (o);
-{ result = EmitOp (o, op_Return); if (result) { ; goto _catch; } };
-{ result = UnwindBlockStack (o); if (result) { ; goto _catch; } };
-        if (valueType)
-        {
-            if (PatchBranches (o))
-            {
-{ result = PushRegister (o, valueType); if (result) { ; goto _catch; } };
+        else
+            PatchBranches (o);
+
+        result = EmitOp (o, op_Return);
+        if (result) { goto _catch; }
+        result = UnwindBlockStack (o);
+        if (result) { goto _catch; }
+
+        if (valueType) {
+            if (PatchBranches (o)) {
+                result = PushRegister (o, valueType);
+                if (result) { goto _catch; }
+
                 ReturnStackTop (o);
-{ result = EmitOp (o, op_Return); if (result) { ; goto _catch; } };
+
+                result = EmitOp (o, op_Return);
+                if (result) { goto _catch; }
             }
         }
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result Compile_SetLocal (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     u32 localSlot;
-{ result = ReadLEB_u32 (& localSlot, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-    if (localSlot < GetFunctionNumArgsAndLocals (o->function))
-    {
+    result = ReadLEB_u32 (& localSlot, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+    if (localSlot < GetFunctionNumArgsAndLocals (o->function)) {
         u16 preserveSlot;
-{ result = FindReferencedLocalWithinCurrentBlock (o, & preserveSlot, localSlot); if (result) { ; goto _catch; } };
-        if (preserveSlot == localSlot)
-{ result = CopyTopSlot (o, localSlot); if (result) { ; goto _catch; } }
-        else
-{ result = PreservedCopyTopSlot (o, localSlot, preserveSlot); if (result) { ; goto _catch; } }
-        if (i_opcode != c_waOp_teeLocal)
-{ result = Pop (o); if (result) { ; goto _catch; } };
+        result = FindReferencedLocalWithinCurrentBlock (o, & preserveSlot, localSlot);
+        if (result) { goto _catch; }
+        if (preserveSlot == localSlot) {
+            result = CopyTopSlot (o, localSlot);
+            if (result) { goto _catch; }
+        }
+        else {
+            result = PreservedCopyTopSlot (o, localSlot, preserveSlot);
+            if (result) { goto _catch; }
+        }
+        if (i_opcode != c_waOp_teeLocal) {
+            result = Pop (o);
+            if (result) { goto _catch; }
+        }
     }
-    else { result = "local index out of bounds"; ; goto _catch; };
-    _catch: return result;
+    else {
+        result = "local index out of bounds"; goto _catch; }
+_catch:
+    return result;
 }
+
 M3Result Compile_GetLocal (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
- {
-    u32 localIndex;
-{ result = ReadLEB_u32 (& localIndex, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-    u8 type = o->typeStack [localIndex];
-{ result = Push (o, type, localIndex); if (result) { ; goto _catch; } };
-    } _catch: return result;
+    {
+        u32 localIndex;
+        result = ReadLEB_u32 (& localIndex, & o->wasm, o->wasmEnd);
+        if (result) { goto _catch; }
+
+        u8 type = o->typeStack [localIndex];
+
+        result = Push (o, type, localIndex);
+        if (result) { goto _catch; }
+    } _catch:
+    return result;
 }
+
 M3Result Compile_GetGlobal (IM3Compilation o, M3Global * i_global)
 {
     M3Result result;
-{ result = EmitOp (o, op_GetGlobal); if (result) { ; goto _catch; } };
+    result = EmitOp (o, op_GetGlobal);
+    if (result) { goto _catch; }
+
     EmitPointer (o, & i_global->intValue);
-{ result = PushAllocatedSlotAndEmit (o, i_global->type); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = PushAllocatedSlotAndEmit (o, i_global->type);
+    if (result) { goto _catch; }
+
+_catch:
+    return result;
 }
+
 M3Result Compile_SetGlobal (IM3Compilation o, M3Global * i_global)
 {
     M3Result result = m3Err_none;
-    if (i_global->isMutable)
-    {
+    if (i_global->isMutable) {
         IM3Operation op;
         u8 type = GetStackTopType (o);
-        if (IsStackTopInRegister (o))
-        {
-            const IM3Operation c_setGlobalOps [] = { NULL, op_SetGlobal_i32, op_SetGlobal_i64, op_SetGlobal_f32, op_SetGlobal_f64 };
+        if (IsStackTopInRegister (o)) {
+            const IM3Operation c_setGlobalOps [] = {
+                NULL,
+                op_SetGlobal_i32,
+                op_SetGlobal_i64,
+                op_SetGlobal_f32,
+                op_SetGlobal_f64
+            };
             op = c_setGlobalOps [type];
         }
-        else op = Is64BitType (type) ? op_SetGlobal_s64 : op_SetGlobal_s32;
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
+        else
+            op = Is64BitType (type) ? op_SetGlobal_s64 : op_SetGlobal_s32;
+
+        result = EmitOp (o, op);
+        if (result) { goto _catch; }
+
         EmitPointer (o, & i_global->intValue);
         if (IsStackTopInSlot (o))
             EmitSlotOffset (o, GetStackTopSlotIndex (o));
-{ result = Pop (o); if (result) { ; goto _catch; } };
+
+        result = Pop (o);
+        if (result) { goto _catch; }
     }
-    else result = m3Err_settingImmutableGlobal;
-    _catch: return result;
+    else
+        result = m3Err_settingImmutableGlobal;
+_catch:
+    return result;
 }
+
 M3Result Compile_GetSetGlobal (IM3Compilation o, u8 i_opcode)
 {
     M3Result result = m3Err_none;
     u32 globalIndex;
-{ result = ReadLEB_u32 (& globalIndex, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-    if (globalIndex < o->module->numGlobals)
-    {
-        if (o->module->globals)
-        {
+    result = ReadLEB_u32 (& globalIndex, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+
+    if (globalIndex < o->module->numGlobals) {
+        if (o->module->globals) {
             M3Global * global = & o->module->globals [globalIndex];
             result = (i_opcode == 0x23) ? Compile_GetGlobal (o, global) : Compile_SetGlobal (o, global);
         }
-        else result = m3Error (m3Err_globalMemoryNotAllocated, o->runtime, o->module, NULL, "m3_compile.c", 946, "module '%s' is missing global memory", o->module->name);
+        else
+            result = m3Error (m3Err_globalMemoryNotAllocated, o->runtime, o->module, NULL,
+                              "m3_compile.c", 946, "module '%s' is missing global memory", o->module->name);
     }
-    else result = m3Error (m3Err_globaIndexOutOfBounds, o->runtime, o->module, NULL, "m3_compile.c", 948, "");
-    _catch: return result;
+    else
+        result = m3Error (m3Err_globaIndexOutOfBounds, o->runtime, o->module, NULL, "m3_compile.c", 948, "");
+_catch:
+    return result;
 }
+
 M3Result Compile_Branch (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     u32 depth;
-{ result = ReadLEB_u32 (& depth, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
+    result = ReadLEB_u32 (& depth, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+
     IM3CompilationScope scope;
-{ result = GetBlockScope (o, & scope, depth); if (result) { ; goto _catch; } };
+    result = GetBlockScope (o, & scope, depth);
+    if (result) { goto _catch; }
+
     IM3Operation op;
-    if (scope->opcode == c_waOp_loop)
-    {
-        if (i_opcode == c_waOp_branchIf)
-        {
-{ result = MoveStackTopToRegister (o); if (result) { ; goto _catch; } };
+    if (scope->opcode == c_waOp_loop) {
+        if (i_opcode == c_waOp_branchIf) {
+            result = MoveStackTopToRegister (o);
+            if (result) { goto _catch; }
+
             op = op_ContinueLoopIf;
-{ result = Pop (o); if (result) { ; goto _catch; } };
+
+            result = Pop (o);
+            if (result) { goto _catch; }
         }
-        else
-        {
+        else {
             op = op_ContinueLoop;
             o->block.isPolymorphic = true;
         }
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
+
+        result = EmitOp (o, op);
+        if (result) { goto _catch; }
+
         EmitPointer (o, scope->pc);
     }
-    else
-    {
+    else {
         u16 conditionSlot = c_slotUnused;
         u16 valueSlot = c_slotUnused;
         u8 valueType = scope->type;
-        if (i_opcode == c_waOp_branchIf)
-        {
+        if (i_opcode == c_waOp_branchIf) {
             bool conditionInRegister = IsStackTopInRegister (o);
             op = conditionInRegister ? op_BranchIf_r : op_BranchIf_s;
             conditionSlot = GetStackTopSlotIndex (o);
-{ result = Pop (o); if (result) { ; goto _catch; } };
-            if (IsFpType (valueType))
-            {
-{ result = MoveStackTopToRegister (o); if (result) { ; goto _catch; } };
+
+            result = Pop (o);
+            if (result) { goto _catch; }
+
+            if (IsFpType (valueType)) {
+                result = MoveStackTopToRegister (o);
+                if (result) { goto _catch; }
             }
-            else if (IsIntType (valueType))
-            {
-                if (IsStackTopInSlot (o))
-                {
+            else if (IsIntType (valueType)) {
+                if (IsStackTopInSlot (o)) {
                     valueSlot = GetStackTopSlotIndex (o);
-                    const IM3Operation ifOps [2][2] = { { op_i32_BranchIf_ss, op_i32_BranchIf_rs }, { op_i64_BranchIf_ss, op_i64_BranchIf_rs } };
+                    const IM3Operation ifOps [2][2] = {
+                        { op_i32_BranchIf_ss, op_i32_BranchIf_rs },
+                        { op_i64_BranchIf_ss, op_i64_BranchIf_rs }
+                    };
                     op = ifOps [valueType - c_m3Type_i32] [conditionInRegister];
                 }
             }
         }
-        else
-        {
+        else {
             op = op_Branch;
-            if (valueType != c_m3Type_none && ! IsStackPolymorphic (o))
-{ result = MoveStackTopToRegister (o); if (result) { ; goto _catch; } };
+            if (valueType != c_m3Type_none && ! IsStackPolymorphic (o)) {
+                result = MoveStackTopToRegister (o);
+                if (result) { goto _catch; }
+            }
             o->block.isPolymorphic = true;
         }
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
+
+        result = EmitOp (o, op);
+        if (result) { goto _catch; }
+
         if (IsValidSlot (conditionSlot))
             EmitSlotOffset (o, conditionSlot);
         if (IsValidSlot (valueSlot))
             EmitSlotOffset (o, valueSlot);
         IM3BranchPatch patch;
-{ result = AcquirePatch (o, & patch); if (result) { ; goto _catch; } };
+
+        result = AcquirePatch (o, & patch);
+        if (result) { goto _catch; }
+
         patch->location = (pc_t *) ReservePointer (o);
         patch->next = scope->patches;
         scope->patches = patch;
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result Compile_BranchTable (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
- {
-    u32 targetCount;
-{ result = ReadLEB_u32 (& targetCount, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = PreserveRegisterIfOccupied (o, c_m3Type_i64); if (result) { ; goto _catch; } };
-    u16 slot = GetStackTopSlotIndex (o);
-{ result = Pop (o); if (result) { ; goto _catch; } };
-    if (GetNumBlockValues (o) > 0)
-{ result = MoveStackTopToRegister (o); if (result) { ; goto _catch; } };
-    u32 numCodeLines = targetCount + 4;
-{ result = EnsureCodePageNumLines (o, numCodeLines); if (result) { ; goto _catch; } };
-{ result = EmitOp (o, op_BranchTable); if (result) { ; goto _catch; } };
-    EmitSlotOffset (o, slot);
-    EmitConstant (o, targetCount);
-    ++targetCount;
-    for (u32 i = 0; i < targetCount; ++i)
     {
-        u32 target;
-{ result = ReadLEB_u32 (& target, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-        IM3CompilationScope scope;
-{ result = GetBlockScope (o, & scope, target); if (result) { ; goto _catch; } };
-        if (scope->opcode == c_waOp_loop)
-        {
-            IM3CodePage continueOpPage = AcquireCodePage (o->runtime);
-            if (continueOpPage)
-            {
-                pc_t startPC = GetPagePC (continueOpPage);
-                EmitPointer (o, startPC);
-                IM3CodePage savedPage = o->page;
-                o->page = continueOpPage;
-{ result = EmitOp (o, op_ContinueLoop); if (result) { ; goto _catch; } };
-                EmitPointer (o, scope->pc);
-                ReleaseCompilationCodePage (o);
-                o->page = savedPage;
+        u32 targetCount;
+        result = ReadLEB_u32 (& targetCount, & o->wasm, o->wasmEnd);
+        if (result) { goto _catch; }
+        result = PreserveRegisterIfOccupied (o, c_m3Type_i64);
+        if (result) { goto _catch; }
+
+        u16 slot = GetStackTopSlotIndex (o);
+
+        result = Pop (o);
+        if (result) { goto _catch; }
+
+        if (GetNumBlockValues (o) > 0) {
+            result = MoveStackTopToRegister (o);
+            if (result) { goto _catch; }
+        }
+        u32 numCodeLines = targetCount + 4;
+
+        result = EnsureCodePageNumLines (o, numCodeLines);
+        if (result) { goto _catch; }
+        result = EmitOp (o, op_BranchTable);
+        if (result) { goto _catch; }
+
+        EmitSlotOffset (o, slot);
+        EmitConstant (o, targetCount);
+        ++targetCount;
+        for (u32 i = 0; i < targetCount; ++i) {
+            u32 target;
+            result = ReadLEB_u32 (& target, & o->wasm, o->wasmEnd);
+            if (result) { goto _catch; }
+
+            IM3CompilationScope scope;
+            result = GetBlockScope (o, & scope, target);
+            if (result) { goto _catch; }
+
+            if (scope->opcode == c_waOp_loop) {
+                IM3CodePage continueOpPage = AcquireCodePage (o->runtime);
+                if (continueOpPage) {
+                    pc_t startPC = GetPagePC (continueOpPage);
+                    EmitPointer (o, startPC);
+                    IM3CodePage savedPage = o->page;
+                    o->page = continueOpPage;
+
+                    result = EmitOp (o, op_ContinueLoop);
+                    if (result) { goto _catch; }
+
+                    EmitPointer (o, scope->pc);
+                    ReleaseCompilationCodePage (o);
+                    o->page = savedPage;
+                }
+                else {
+                    result = m3Err_mallocFailedCodePage;
+                    goto _catch;
+                }
             }
-            else { result = m3Err_mallocFailedCodePage; ; goto _catch; };
+            else {
+                IM3BranchPatch patch;
+                result = AcquirePatch (o, & patch);
+                if (result) { goto _catch; }
+
+                patch->location = (pc_t *) ReservePointer (o);
+                patch->next = scope->patches;
+                scope->patches = patch;
+            }
         }
-        else
-        {
-            IM3BranchPatch patch;
-{ result = AcquirePatch (o, & patch); if (result) { ; goto _catch; } };
-            patch->location = (pc_t *) ReservePointer (o);
-            patch->next = scope->patches;
-            scope->patches = patch;
-        }
+        o->block.isPolymorphic = true;
     }
-    o->block.isPolymorphic = true;
-    } _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result CompileCallArgsReturn (IM3Compilation o, u16 * o_stackOffset, IM3FuncType i_type, bool i_isIndirect)
 {
     M3Result result = m3Err_none;
- {
-    u16 execTop = GetMaxExecSlot (o);
-    if (execTop == 0)
-        execTop = 1;
-    * o_stackOffset = execTop;
-    u32 numArgs = i_type->numArgs + i_isIndirect;
-    u16 argTop = execTop + numArgs;
-    while (numArgs--)
     {
-{ result = CopyTopSlot (o, --argTop); if (result) { ; goto _catch; } };
-{ result = Pop (o); if (result) { ; goto _catch; } };
-    }
-    i32 numReturns = i_type->returnType ? 1 : 0;
-    if (numReturns)
-    {
-        MarkSlotAllocated (o, execTop);
-{ result = Push (o, i_type->returnType, execTop); if (result) { ; goto _catch; } };
-    }
-    } _catch: return result;
+        u16 execTop = GetMaxExecSlot (o);
+        if (execTop == 0)
+            execTop = 1;
+        * o_stackOffset = execTop;
+        u32 numArgs = i_type->numArgs + i_isIndirect;
+        u16 argTop = execTop + numArgs;
+        while (numArgs--) {
+            result = CopyTopSlot (o, --argTop);
+            if (result) { goto _catch; }
+            result = Pop (o);
+            if (result) { goto _catch; }
+        }
+        i32 numReturns = i_type->returnType ? 1 : 0;
+        if (numReturns) {
+            MarkSlotAllocated (o, execTop);
+            result = Push (o, i_type->returnType, execTop);
+            if (result) { goto _catch; }
+        }
+    } _catch:
+    return result;
 }
+
 M3Result Compile_Call (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
- {
-    u32 functionIndex;
-{ result = ReadLEB_u32 (& functionIndex, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-    IM3Function function = Module_GetFunction (o->module, functionIndex);
-    if (function)
-    { {};
-        if (function->module)
-        {
-            u16 slotTop;
-{ result = CompileCallArgsReturn (o, & slotTop, function->funcType, false); if (result) { ; goto _catch; } };
-            IM3Operation op;
-            const void * operand;
-            if (function->compiled)
-            {
-                op = op_Call;
-                operand = function->compiled;
+    {
+        u32 functionIndex;
+        result = ReadLEB_u32 (& functionIndex, & o->wasm, o->wasmEnd);
+        if (result) { goto _catch; }
+        IM3Function function = Module_GetFunction (o->module, functionIndex);
+        if (function) {
+            if (function->module) {
+                u16 slotTop;
+                result = CompileCallArgsReturn (o, & slotTop, function->funcType, false);
+                if (result) { goto _catch; }
+
+                IM3Operation op;
+                const void * operand;
+                if (function->compiled) {
+                    op = op_Call;
+                    operand = function->compiled;
+                }
+                else {
+                    op = op_Compile;
+                    operand = function;
+                }
+
+                result = EmitOp (o, op);
+                if (result) { goto _catch; }
+
+                EmitPointer (o, operand);
+                EmitSlotOffset (o, slotTop);
             }
-            else
-            { ;
-                op = op_Compile;
-                operand = function;
+            else {
+                result = m3Error (m3Err_functionImportMissing, o->runtime, o->module, NULL,
+                                  "m3_compile.c", 1197, "'%s.%s'",
+                                  GetFunctionImportModuleName (function),
+                                  GetFunctionName (function));
             }
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
-            EmitPointer (o, operand);
-            EmitSlotOffset (o, slotTop);
         }
         else
-        {
-            result = m3Error (m3Err_functionImportMissing, o->runtime, o->module, NULL, "m3_compile.c", 1197, "'%s.%s'", GetFunctionImportModuleName (function), GetFunctionName (function));
-        }
-    }
-    else result = m3Err_functionLookupFailed;
-    } _catch: return result;
+            result = m3Err_functionLookupFailed;
+    } _catch:
+    return result;
 }
+
 M3Result Compile_CallIndirect (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     u32 typeIndex;
-{ result = ReadLEB_u32 (& typeIndex, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
+    result = ReadLEB_u32 (& typeIndex, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+
     i8 reserved;
-{ result = ReadLEB_i7 (& reserved, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-    if (typeIndex < o->module->numFuncTypes)
-    {
+    result = ReadLEB_i7 (& reserved, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+
+    if (typeIndex < o->module->numFuncTypes) {
         u16 execTop;
         IM3FuncType type = & o->module->funcTypes [typeIndex];
-{ result = CompileCallArgsReturn (o, & execTop, type, true); if (result) { ; goto _catch; } };
-{ result = EmitOp (o, op_CallIndirect); if (result) { ; goto _catch; } };
+        result = CompileCallArgsReturn (o, & execTop, type, true);
+        if (result) { goto _catch; }
+
+        result = EmitOp (o, op_CallIndirect);
+        if (result) { goto _catch; }
+
         EmitPointer (o, o->module);
         EmitPointer (o, type);
         EmitSlotOffset (o, execTop);
     }
-    else { result = "function type index out of range"; ; goto _catch; };
-    _catch: return result;
+    else {
+        result = "function type index out of range";
+        goto _catch;
+    }
+_catch:
+    return result;
 }
+
 M3Result Compile_Memory_Current (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     i8 reserved;
-{ result = ReadLEB_i7 (& reserved, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = EmitOp (o, op_MemCurrent); if (result) { ; goto _catch; } };
-{ result = PushRegister (o, c_m3Type_i32); if (result) { ; goto _catch; } };
-    _catch: return result;
+    result = ReadLEB_i7 (& reserved, & o->wasm, o->wasmEnd);
+    if (result) { goto _catch; }
+
+    result = EmitOp (o, op_MemCurrent);
+    if (result) { goto _catch; }
+
+    result = PushRegister (o, c_m3Type_i32);
+    if (result) { goto _catch; }
+
+_catch:
+    return result;
 }
+
 M3Result Compile_Memory_Grow (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     i8 reserved;
-{ result = ReadLEB_i7 (& reserved, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = MoveStackTopToRegister (o); if (result) { ; goto _catch; } };
-{ result = Pop (o); if (result) { ; goto _catch; } };
-{ result = EmitOp (o, op_MemGrow); if (result) { ; goto _catch; } };
-{ result = PushRegister (o, c_m3Type_i32); if (result) { ; goto _catch; } };
-    _catch: return result;
+    {
+        result = ReadLEB_i7 (& reserved, & o->wasm, o->wasmEnd);
+        if (result) { goto _catch; }
+    }
+    {
+        result = MoveStackTopToRegister (o);
+        if (result) { goto _catch; }
+    }
+    {
+        result = Pop (o);
+        if (result) { goto _catch; }
+    }
+    {
+        result = EmitOp (o, op_MemGrow);
+        if (result) { goto _catch; }
+    }
+    {
+        result = PushRegister (o, c_m3Type_i32);
+        if (result) { goto _catch; }
+    }
+_catch:
+    return result;
 }
+
 M3Result ReadBlockType (IM3Compilation o, u8 * o_blockType)
 {
-    M3Result result; ;
+    M3Result result;
     i8 type;
-{ result = ReadLEB_i7 (& type, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = NormalizeType (o_blockType, type); if (result) { ; goto _catch; } }; if (* o_blockType) {};
-    _catch: return result;
+    {
+        result = ReadLEB_i7 (& type, & o->wasm, o->wasmEnd);
+        if (result) { goto _catch; }
+    }
+    {
+        result = NormalizeType (o_blockType, type);
+        if (result) { goto _catch; }
+    }
+    if (* o_blockType) {}
+_catch:
+    return result;
 }
+
 M3Result PreserveArgsAndLocals (IM3Compilation o)
 {
     M3Result result = m3Err_none;
-    if (o->stackIndex > o->firstSlotIndex)
-    {
+    if (o->stackIndex > o->firstSlotIndex) {
         u32 numArgsAndLocals = GetFunctionNumArgsAndLocals (o->function);
-        for (u32 i = 0; i < numArgsAndLocals; ++i)
-        {
+        for (u32 i = 0; i < numArgsAndLocals; ++i) {
             u16 preservedSlotIndex;
-{ result = FindReferencedLocalWithinCurrentBlock (o, & preservedSlotIndex, i); if (result) { ; goto _catch; } };
-            if (preservedSlotIndex != i)
             {
+                result = FindReferencedLocalWithinCurrentBlock (o, & preservedSlotIndex, i);
+                if (result) { goto _catch; }
+            }
+            if (preservedSlotIndex != i) {
                 u8 type = GetStackBottomType (o, i);
                 IM3Operation op = Is64BitType (type) ? op_CopySlot_64 : op_CopySlot_32;
                 EmitOp (o, op);
@@ -5708,196 +5968,289 @@ M3Result PreserveArgsAndLocals (IM3Compilation o)
             }
         }
     }
-    _catch:
+_catch:
     return result;
 }
+
 M3Result Compile_LoopOrBlock (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
-{ result = PreserveRegisters (o); if (result) { ; goto _catch; } };
-{ result = PreserveArgsAndLocals (o); if (result) { ; goto _catch; } };
+    {
+        result = PreserveRegisters (o);
+        if (result) { goto _catch; }
+    }
+    {
+        result = PreserveArgsAndLocals (o);
+        if (result) { goto _catch; }
+    }
     u8 blockType;
-{ result = ReadBlockType (o, & blockType); if (result) { ; goto _catch; } };
+    {
+        result = ReadBlockType (o, & blockType);
+        if (result) { goto _catch; }
+    }
     if (i_opcode == c_waOp_loop)
-{ result = EmitOp (o, op_Loop); if (result) { ; goto _catch; } };
-{ result = CompileBlock (o, blockType, i_opcode); if (result) { ; goto _catch; } };
-    _catch: return result;
+    {
+        result = EmitOp (o, op_Loop);
+        if (result) { goto _catch; }
+    }
+    {
+        result = CompileBlock (o, blockType, i_opcode);
+        if (result) { goto _catch; }
+    }
+_catch:
+    return result;
 }
+
 M3Result CompileElseBlock (IM3Compilation o, pc_t * o_startPC, u8 i_blockType)
 {
     M3Result result;
     IM3CodePage elsePage = AcquireCodePage (o->runtime);
-    if (elsePage)
-    {
+    if (elsePage) {
         * o_startPC = GetPagePC (elsePage);
         IM3CodePage savedPage = o->page;
         o->page = elsePage;
-{ result = CompileBlock (o, i_blockType, c_waOp_else); if (result) { ; goto _catch; } };
-{ result = EmitOp (o, op_Branch); if (result) { ; goto _catch; } };
+        {
+            result = CompileBlock (o, i_blockType, c_waOp_else);
+            if (result) { goto _catch; }
+        }
+        {
+            result = EmitOp (o, op_Branch);
+            if (result) { goto _catch; }
+        }
         EmitPointer (o, GetPagePC (savedPage));
         ReleaseCompilationCodePage (o);
         o->page = savedPage;
     }
     else result = m3Err_mallocFailedCodePage;
-    _catch:
+_catch:
     return result;
 }
+
 M3Result Compile_If (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
- {
-{ result = PreserveNonTopRegisters (o); if (result) { ; goto _catch; } };
-{ result = PreserveArgsAndLocals (o); if (result) { ; goto _catch; } };
-    IM3Operation op = IsStackTopInRegister (o) ? op_If_r : op_If_s;
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
-{ result = EmitTopSlotAndPop (o); if (result) { ; goto _catch; } };
-    i32 stackIndex = o->stackIndex;
-    pc_t * pc = (pc_t *) ReservePointer (o);
-    u8 blockType;
-{ result = ReadBlockType (o, & blockType); if (result) { ; goto _catch; } };
-{ result = CompileBlock (o, blockType, i_opcode); if (result) { ; goto _catch; } };
-    if (o->previousOpcode == c_waOp_else)
     {
-        if (blockType && o->stackIndex > stackIndex)
         {
-{ result = Pop (o); if (result) { ; goto _catch; } };
+            result = PreserveNonTopRegisters (o);
+            if (result) { goto _catch; }
         }
-{ result = CompileElseBlock (o, pc, blockType); if (result) { ; goto _catch; } };
-    }
-    else * pc = GetPC (o);
-    } _catch: return result;
+        {
+            result = PreserveArgsAndLocals (o);
+            if (result) { goto _catch; }
+        }
+        IM3Operation op = IsStackTopInRegister (o) ? op_If_r : op_If_s;
+        {
+            result = EmitOp (o, op);
+            if (result) { goto _catch; }
+        }
+        {
+            result = EmitTopSlotAndPop (o);
+            if (result) { goto _catch; }
+        }
+        i32 stackIndex = o->stackIndex;
+        pc_t * pc = (pc_t *) ReservePointer (o);
+        u8 blockType;
+        {
+            result = ReadBlockType (o, & blockType);
+            if (result) { goto _catch; }
+        }
+        {
+            result = CompileBlock (o, blockType, i_opcode);
+            if (result) { goto _catch; }
+        }
+        if (o->previousOpcode == c_waOp_else) {
+            if (blockType && o->stackIndex > stackIndex) {
+                {
+                    result = Pop (o);
+                    if (result) { goto _catch; }
+                }
+            }
+            {
+                result = CompileElseBlock (o, pc, blockType);
+                if (result) { goto _catch; }
+            }
+        }
+        else * pc = GetPC (o);
+    } _catch:
+    return result;
 }
+
 M3Result Compile_Select (IM3Compilation o, u8 i_opcode)
 {
-    static const IM3Operation intSelectOps [2] [4] = { { op_Select_i32_rss, op_Select_i32_srs, op_Select_i32_ssr, op_Select_i32_sss },
-                                                            { op_Select_i64_rss, op_Select_i64_srs, op_Select_i64_ssr, op_Select_i64_sss } };
-    static const IM3Operation fpSelectOps [2] [2] [3] = { { { op_Select_f32_sss, op_Select_f32_srs, op_Select_f32_ssr },
-                                                            { op_Select_f32_rss, op_Select_f32_rrs, op_Select_f32_rsr } },
-                                                          { { op_Select_f64_sss, op_Select_f64_srs, op_Select_f64_ssr },
-                                                            { op_Select_f64_rss, op_Select_f64_rrs, op_Select_f64_rsr } } };
+    static const IM3Operation intSelectOps [2] [4] = {
+        { op_Select_i32_rss, op_Select_i32_srs, op_Select_i32_ssr, op_Select_i32_sss },
+        { op_Select_i64_rss, op_Select_i64_srs, op_Select_i64_ssr, op_Select_i64_sss }
+    };
+    static const IM3Operation fpSelectOps [2] [2] [3] = {
+        {
+            { op_Select_f32_sss, op_Select_f32_srs, op_Select_f32_ssr },
+            { op_Select_f32_rss, op_Select_f32_rrs, op_Select_f32_rsr }
+        },
+        {
+            { op_Select_f64_sss, op_Select_f64_srs, op_Select_f64_ssr },
+            { op_Select_f64_rss, op_Select_f64_rrs, op_Select_f64_rsr }
+        }
+    };
     M3Result result = m3Err_none;
     u16 slots [3] = { c_slotUnused, c_slotUnused, c_slotUnused };
     u8 type = GetStackTopTypeAtOffset (o, 1);
     IM3Operation op = NULL;
-    if (IsFpType (type))
-    {
+    if (IsFpType (type)) {
         bool selectorInReg = IsStackTopInRegister (o);
         slots [0] = GetStackTopSlotIndex (o);
-{ result = Pop (o); if (result) { ; goto _catch; } };
-        u32 opIndex = 0;
-        for (u32 i = 1; i <= 2; ++i)
         {
+            result = Pop (o);
+            if (result) { goto _catch; }
+        }
+        u32 opIndex = 0;
+        for (u32 i = 1; i <= 2; ++i) {
             if (IsStackTopInRegister (o))
                 opIndex = i;
             else
                 slots [i] = GetStackTopSlotIndex (o);
-{ result = Pop (o); if (result) { ; goto _catch; } };
+            {
+                result = Pop (o);
+                if (result) { goto _catch; }
+            }
         }
         if (opIndex == 0)
-{ result = PreserveRegisterIfOccupied (o, type); if (result) { ; goto _catch; } };
+        {
+            result = PreserveRegisterIfOccupied (o, type);
+            if (result) { goto _catch; }
+        }
         op = fpSelectOps [type - c_m3Type_f32] [selectorInReg] [opIndex];
     }
-    else if (IsIntType (type))
-    {
+    else if (IsIntType (type)) {
         u32 opIndex = 3;
-        for (u32 i = 0; i < 3; ++i)
-        {
+        for (u32 i = 0; i < 3; ++i) {
             if (IsStackTopInRegister (o))
                 opIndex = i;
             else
                 slots [i] = GetStackTopSlotIndex (o);
-{ result = Pop (o); if (result) { ; goto _catch; } };
+            {
+                result = Pop (o);
+                if (result) { goto _catch; }
+            }
         }
         if (opIndex == 3)
-{ result = PreserveRegisterIfOccupied (o, type); if (result) { ; goto _catch; } };
+        {
+            result = PreserveRegisterIfOccupied (o, type);
+            if (result) { goto _catch; }
+        }
         op = intSelectOps [type - c_m3Type_i32] [opIndex];
     }
-    else if (! IsStackPolymorphic (o))
-        { result = m3Err_functionStackUnderrun; ; goto _catch; };
+    else if (! IsStackPolymorphic (o)) {
+        result = m3Err_functionStackUnderrun; goto _catch; }
     EmitOp (o, op);
-    for (u32 i = 0; i < 3; i++)
-    {
+    for (u32 i = 0; i < 3; i++) {
         if (IsValidSlot (slots [i]))
             EmitSlotOffset (o, slots [i]);
     }
-{ result = PushRegister (o, type); if (result) { ; goto _catch; } };
-    _catch: return result;
+    {
+        result = PushRegister (o, type);
+        if (result) { goto _catch; }
+    }
+_catch:
+    return result;
 }
+
 M3Result Compile_Drop (IM3Compilation o, u8 i_opcode)
 {
     return Pop (o);
 }
+
 M3Result Compile_Nop (IM3Compilation o, u8 i_opcode)
 {
     return m3Err_none;
 }
+
 M3Result Compile_Unreachable (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
-{ result = AddTrapRecord (o); if (result) { ; goto _catch; } };
-{ result = EmitOp (o, op_Unreachable); if (result) { ; goto _catch; } };
+    {
+        result = AddTrapRecord (o);
+        if (result) { goto _catch; }
+    }
+    {
+        result = EmitOp (o, op_Unreachable);
+        if (result) { goto _catch; }
+    }
     o->block.isPolymorphic = true;
-    _catch:
+_catch:
     return result;
 }
+
 M3Result Compile_Operator (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
     const M3OpInfo * op = & c_operations [i_opcode];
     IM3Operation operation;
-    if (IsFpType (GetStackTopType (o)) && IsIntType (op->type))
-    {
-{ result = PreserveRegisterIfOccupied (o, op->type); if (result) { ; goto _catch; } };
-    }
-    if (op->stackOffset == 0)
-    {
-        if (IsStackTopInRegister (o))
+    if (IsFpType (GetStackTopType (o)) && IsIntType (op->type)) {
         {
+            result = PreserveRegisterIfOccupied (o, op->type);
+            if (result) { goto _catch; }
+        }
+    }
+    if (op->stackOffset == 0) {
+        if (IsStackTopInRegister (o)) {
             operation = op->operations [0];
         }
-        else
-        {
-{ result = PreserveRegisterIfOccupied (o, op->type); if (result) { ; goto _catch; } };
+        else {
+            {
+                result = PreserveRegisterIfOccupied (o, op->type);
+                if (result) { goto _catch; }
+            }
             operation = op->operations [1];
         }
     }
-    else
-    {
-        if (IsStackTopInRegister (o))
-        {
+    else {
+        if (IsStackTopInRegister (o)) {
             operation = op->operations [0];
-            if (IsStackTopMinus1InRegister (o))
-            { ;
+            if (IsStackTopMinus1InRegister (o)) {
                 operation = op->operations [3];
             }
         }
-        else if (IsStackTopMinus1InRegister (o))
-        {
+        else if (IsStackTopMinus1InRegister (o)) {
             operation = op->operations [1];
             if (! operation)
                 operation = op->operations [0];
         }
-        else
-        {
-{ result = PreserveRegisterIfOccupied (o, op->type); if (result) { ; goto _catch; } };
+        else {
+            {
+                result = PreserveRegisterIfOccupied (o, op->type);
+                if (result) { goto _catch; }
+            }
             operation = op->operations [2];
         }
     }
-    if (operation)
-    {
-{ result = EmitOp (o, operation); if (result) { ; goto _catch; } };
-{ result = EmitTopSlotAndPop (o); if (result) { ; goto _catch; } };
+    if (operation) {
+        {
+            result = EmitOp (o, operation);
+            if (result) { goto _catch; }
+        }
+        {
+            result = EmitTopSlotAndPop (o);
+            if (result) { goto _catch; }
+        }
         if (op->stackOffset < 0)
-{ result = EmitTopSlotAndPop (o); if (result) { ; goto _catch; } };
+        {
+            result = EmitTopSlotAndPop (o);
+            if (result) { goto _catch; }
+        }
         if (op->type != c_m3Type_none)
-{ result = PushRegister (o, op->type); if (result) { ; goto _catch; } };
+        {
+            result = PushRegister (o, op->type);
+            if (result) { goto _catch; }
+        }
     }
-    else
-    {
-            result = m3Error ("no operation found for opcode", o->runtime, o->module, NULL, "m3_compile.c", 1575, "");
+    else {
+        result = m3Error ("no operation found for opcode", o->runtime, o->module,
+                          NULL, "m3_compile.c", 1575, "");
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result Compile_Convert (IM3Compilation o, u8 i_opcode)
 {
     M3Result result = m3Err_none;
@@ -5905,30 +6258,56 @@ M3Result Compile_Convert (IM3Compilation o, u8 i_opcode)
     bool destInSlot = IsRegisterTypeAllocated (o, opInfo->type);
     bool sourceInSlot = IsStackTopInSlot (o);
     IM3Operation op = opInfo->operations [destInSlot * 2 + sourceInSlot];
-{ result = EmitOp (o, op); if (result) { ; goto _catch; } };
-{ result = EmitTopSlotAndPop (o); if (result) { ; goto _catch; } };
+    {
+        result = EmitOp (o, op);
+        if (result) { goto _catch; }
+    }
+    {
+        result = EmitTopSlotAndPop (o);
+        if (result) { goto _catch; }
+    }
     if (destInSlot)
-{ result = PushAllocatedSlotAndEmit (o, opInfo->type); if (result) { ; goto _catch; } }
+    {
+        result = PushAllocatedSlotAndEmit (o, opInfo->type);
+        if (result) { goto _catch; }
+    }
     else
-{ result = PushRegister (o, opInfo->type); if (result) { ; goto _catch; } }
-    _catch: return result;
+    {
+        result = PushRegister (o, opInfo->type);
+        if (result) { goto _catch; }
+    }
+_catch:
+    return result;
 }
+
 M3Result Compile_Load_Store (IM3Compilation o, u8 i_opcode)
 {
     M3Result result;
- {
-    u32 alignHint, memoryOffset;
-{ result = ReadLEB_u32 (& alignHint, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = ReadLEB_u32 (& memoryOffset, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-                                                                        {};
-    const M3OpInfo * op = & c_operations [i_opcode];
-    if (IsFpType (op->type))
-{ result = PreserveRegisterIfOccupied (o, c_m3Type_f64); if (result) { ; goto _catch; } };
-{ result = Compile_Operator (o, i_opcode); if (result) { ; goto _catch; } };
-    EmitConstant (o, memoryOffset);
+    {
+        u32 alignHint, memoryOffset;
+        {
+            result = ReadLEB_u32 (& alignHint, & o->wasm, o->wasmEnd);
+            if (result) { goto _catch; }
+        }
+        {
+            result = ReadLEB_u32 (& memoryOffset, & o->wasm, o->wasmEnd);
+            if (result) { goto _catch; }
+        }
+        const M3OpInfo * op = & c_operations [i_opcode];
+        if (IsFpType (op->type)) {
+            result = PreserveRegisterIfOccupied (o, c_m3Type_f64);
+            if (result) { goto _catch; }
+        }
+        {
+            result = Compile_Operator (o, i_opcode);
+            if (result) { goto _catch; }
+        }
+        EmitConstant (o, memoryOffset);
+    }
+_catch:
+    return result;
 }
-    _catch: return result;
-}
+
 const M3OpInfo c_operations [] =
 {
     { 0, c_m3Type_none, { op_Unreachable, NULL, NULL, NULL }, Compile_Unreachable },
@@ -6112,11 +6491,11 @@ const M3OpInfo c_operations [] =
     { 0, c_m3Type_f64, { op_f64_Reinterpret_i64_r_r, op_f64_Reinterpret_i64_r_s, op_f64_Reinterpret_i64_s_r, op_f64_Reinterpret_i64_s_s }, Compile_Convert },
     { 0, c_m3Type_void }
 };
+
 M3Result Compile_BlockStatements (IM3Compilation o)
 {
     M3Result result = m3Err_none;
-    while (o->wasm < o->wasmEnd)
-    { emit_stack_dump (o);
+    while (o->wasm < o->wasmEnd) { emit_stack_dump (o);
         u8 opcode = * (o->wasm++); log_opcode (o, opcode);
         const M3OpInfo * op = & c_operations [opcode];
         M3Compiler compiler = op->compiler;
@@ -6136,38 +6515,46 @@ M3Result Compile_BlockStatements (IM3Compilation o)
     }
     return result;
 }
+
 M3Result ValidateBlockEnd (IM3Compilation o, bool * o_copyStackTopToRegister)
 {
     M3Result result = m3Err_none;
     * o_copyStackTopToRegister = false;
-    if (o->block.type != c_m3Type_none)
-    {
-        if (IsStackPolymorphic (o))
-        {
-{ result = UnwindBlockStack (o); if (result) { ; goto _catch; } };
-{ result = PushRegister (o, o->block.type); if (result) { ; goto _catch; } };
-        }
-        else
-        {
-            i16 initStackIndex = o->block.initStackIndex;
-            if (o->block.depth > 0 && initStackIndex != o->stackIndex)
+    if (o->block.type != c_m3Type_none) {
+        if (IsStackPolymorphic (o)) {
             {
-                if (o->stackIndex == initStackIndex + 1)
-                {
+                result = UnwindBlockStack (o);
+                if (result) { goto _catch; }
+            }
+            {
+                result = PushRegister (o, o->block.type);
+                if (result) { goto _catch; }
+            }
+        }
+        else {
+            i16 initStackIndex = o->block.initStackIndex;
+            if (o->block.depth > 0 && initStackIndex != o->stackIndex) {
+                if (o->stackIndex == initStackIndex + 1) {
                     * o_copyStackTopToRegister = IsStackTopInSlot (o);
                 }
-                else { result = "unexpected block stack offset"; ; goto _catch; };
+                else {
+                    result = "unexpected block stack offset";
+                    goto _catch;
+                }
             }
         }
     }
-    else
-{ result = UnwindBlockStack (o); if (result) { ; goto _catch; } };
-    _catch: return result;
+    else {
+        result = UnwindBlockStack (o);
+        if (result) { goto _catch; }
+    }
+_catch:
+    return result;
 }
+
 M3Result CompileBlock (IM3Compilation o, u8 i_blockType, u8 i_blockOpcode)
 {
-    M3Result result; ;
-                                                                                        ;
+    M3Result result;
     M3CompilationScope outerScope = o->block;
     M3CompilationScope * block = & o->block;
     block->outer = & outerScope;
@@ -6177,45 +6564,68 @@ M3Result CompileBlock (IM3Compilation o, u8 i_blockType, u8 i_blockOpcode)
     block->initStackIndex = o->stackIndex;
     block->depth ++;
     block->opcode = i_blockOpcode;
-{ result = Compile_BlockStatements (o); if (result) { ; goto _catch; } };
+    {
+        result = Compile_BlockStatements (o);
+        if (result) { goto _catch; }
+    }
     bool moveStackTopToRegister;
-{ result = ValidateBlockEnd (o, & moveStackTopToRegister); if (result) { ; goto _catch; } };
-    if (moveStackTopToRegister)
-{ result = MoveStackTopToRegister (o); if (result) { ; goto _catch; } };
+    {
+        result = ValidateBlockEnd (o, & moveStackTopToRegister);
+        if (result) { goto _catch; }
+    }
+    if (moveStackTopToRegister) {
+        result = MoveStackTopToRegister (o);
+        if (result) { goto _catch; }
+    }
     PatchBranches (o);
     o->block = outerScope;
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result CompileLocals (IM3Compilation o)
 {
     M3Result result;
     u32 numLocalBlocks;
-{ result = ReadLEB_u32 (& numLocalBlocks, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-    for (u32 l = 0; l < numLocalBlocks; ++l)
     {
+        result = ReadLEB_u32 (& numLocalBlocks, & o->wasm, o->wasmEnd);
+        if (result) { goto _catch; }
+    }
+    for (u32 l = 0; l < numLocalBlocks; ++l) {
         u32 varCount;
         i8 waType;
         u8 localType;
-{ result = ReadLEB_u32 (& varCount, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = ReadLEB_i7 (& waType, & o->wasm, o->wasmEnd); if (result) { ; goto _catch; } };
-{ result = NormalizeType (& localType, waType); if (result) { ; goto _catch; } };
-                                                                                                {};
-        while (varCount--)
-{ result = PushAllocatedSlot (o, localType); if (result) { ; goto _catch; } };
+        {
+            result = ReadLEB_u32 (& varCount, & o->wasm, o->wasmEnd);
+            if (result) { goto _catch; }
+        }
+        {
+            result = ReadLEB_i7 (& waType, & o->wasm, o->wasmEnd);
+            if (result) { goto _catch; }
+        }
+        {
+            result = NormalizeType (& localType, waType);
+            if (result) { goto _catch; }
+        }
+        while (varCount--) {
+            result = PushAllocatedSlot (o, localType);
+            if (result) { goto _catch; }
+        }
     }
-    _catch: return result;
+_catch:
+    return result;
 }
+
 M3Result Compile_ReserveConstants (IM3Compilation o)
 {
     M3Result result = m3Err_none;
     u32 numConstants = 0;
     bytes_t wa = o->wasm;
-    while (wa < o->wasmEnd)
-    {
+    while (wa < o->wasmEnd) {
         u8 code = * wa++;
         if (code >= 0x41 && code <= 0x44)
             ++numConstants;
-    } {}
+    }
     o->firstSlotIndex = o->firstConstSlotIndex = o->constSlotIndex = o->stackIndex;
     numConstants = (((numConstants) < (60)) ? (numConstants) : (60));
     u32 freeSlots = 2000 - o->constSlotIndex;
@@ -6235,7 +6645,7 @@ void SetupCompilation (IM3Compilation o)
 
 M3Result Compile_Function (IM3Function io_function)
 {
-    M3Result result = m3Err_none; {};
+    M3Result result = m3Err_none;
     IM3Runtime runtime = io_function->module->runtime;
     IM3Compilation o = & runtime->compilation;
     SetupCompilation (o);
@@ -6255,36 +6665,36 @@ M3Result Compile_Function (IM3Function io_function)
             u8 type = ft->argTypes [i];
             {
                 result = PushAllocatedSlot (o, type);
-                if (result) { ; goto _catch; }
+                if (result) { goto _catch; }
             }
         }
         {
             result = CompileLocals (o);
-            if (result) { ; goto _catch; }
+            if (result) { goto _catch; }
         }
         {
             result = Compile_ReserveConstants (o);
-            if (result) { ; goto _catch; }
+            if (result) { goto _catch; }
         }
         o->function->maxStackSlots = o->firstSlotIndex;
         o->numAllocatedExecSlots = 0;
         o->block.initStackIndex = o->stackIndex;
         {
             result = EmitOp (o, op_Entry);
-            if (result) { ; goto _catch; }
+            if (result) { goto _catch; }
         }
         EmitPointer (o, io_function);
         {
             result = Compile_BlockStatements (o);
-            if (result) { ; goto _catch; }
+            if (result) { goto _catch; }
         }
         io_function->compiled = pc;
         u32 numConstants = o->constSlotIndex - o->firstConstSlotIndex;
-        io_function->numConstants = numConstants; {}
+        io_function->numConstants = numConstants;
         if (numConstants) {
             {
                 result = m3Malloc ((void **) & io_function->constants, sizeof (u64) * (numConstants));
-                if (result) { ; goto _catch; }
+                if (result) { goto _catch; }
             }
             memcpy (io_function->constants, o->constants, sizeof (u64) * numConstants);
         }
