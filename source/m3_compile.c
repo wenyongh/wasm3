@@ -204,6 +204,7 @@ void EmitWord_impl (IM3CodePage i_page, void* i_word);
 void PushCodePage (IM3CodePage * i_list, IM3CodePage i_codePage);
 IM3CodePage PopCodePage (IM3CodePage * i_list);
 typedef m3ret_t ( * IM3Operation) (pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0);
+
 static inline u32
 rotl32(u32 n, unsigned c) {
     const unsigned mask = CHAR_BIT * sizeof(n) - 1;
