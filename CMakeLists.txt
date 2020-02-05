@@ -41,7 +41,8 @@ if(BUILD_32BIT)
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "set build type to Release")
+  #set(CMAKE_BUILD_TYPE "Release" CACHE STRING "set build type to Release")
+  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "set build type to Debug")
 endif()
 
 project(wasm3)
