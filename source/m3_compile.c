@@ -260,14 +260,14 @@ Call (pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     m3Yield ();
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
 }
- 
+
 static inline m3ret_t
 op_i32_Equal_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) == (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Equal_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -276,7 +276,7 @@ op_i32_Equal_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) == (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Equal_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -284,7 +284,7 @@ op_i64_Equal_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) == (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Equal_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -301,7 +301,7 @@ op_i32_NotEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) != (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_NotEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -310,7 +310,7 @@ op_i32_NotEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) != (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_NotEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -318,7 +318,7 @@ op_i64_NotEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) != (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_NotEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -335,7 +335,7 @@ op_i32_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i32) _r0)) < (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -343,7 +343,7 @@ op_i32_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) < (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -352,7 +352,7 @@ op_i32_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) < (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -360,7 +360,7 @@ op_i64_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i64) _r0)) < (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -368,7 +368,7 @@ op_i64_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) < (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -385,7 +385,7 @@ op_i32_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i32) _r0)) > (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -393,7 +393,7 @@ op_i32_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) > (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -402,7 +402,7 @@ op_i32_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) > (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -410,7 +410,7 @@ op_i64_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i64) _r0)) > (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -418,7 +418,7 @@ op_i64_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) > (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -435,7 +435,7 @@ op_i32_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i32) _r0)) <= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -443,7 +443,7 @@ op_i32_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) <= (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -452,7 +452,7 @@ op_i32_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) <= (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -460,7 +460,7 @@ op_i64_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i64) _r0)) <= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -468,7 +468,7 @@ op_i64_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) <= (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -485,7 +485,7 @@ op_i32_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i32) _r0)) >= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -493,7 +493,7 @@ op_i32_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) >= (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -502,7 +502,7 @@ op_i32_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) >= (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -510,7 +510,7 @@ op_i64_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i64) _r0)) >= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -518,7 +518,7 @@ op_i64_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) >= (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -535,7 +535,7 @@ op_u32_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u32) _r0)) < (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -543,7 +543,7 @@ op_u32_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) < (((u32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -552,7 +552,7 @@ op_u32_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     u32 operand1 = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) < (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -560,7 +560,7 @@ op_u64_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u64) _r0)) < (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -568,7 +568,7 @@ op_u64_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) < (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -585,7 +585,7 @@ op_u32_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u32) _r0)) > (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -593,7 +593,7 @@ op_u32_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) > (((u32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -602,7 +602,7 @@ op_u32_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     u32 operand1 = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) > (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -610,7 +610,7 @@ op_u64_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u64) _r0)) > (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -618,7 +618,7 @@ op_u64_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) > (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -635,7 +635,7 @@ op_u32_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u32) _r0)) <= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -643,7 +643,7 @@ op_u32_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) <= (((u32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -652,7 +652,7 @@ op_u32_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     u32 operand1 = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) <= (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -660,7 +660,7 @@ op_u64_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u64) _r0)) <= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -668,7 +668,7 @@ op_u64_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) <= (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -685,7 +685,7 @@ op_u32_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u32) _r0)) >= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -693,7 +693,7 @@ op_u32_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) >= (((u32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -702,7 +702,7 @@ op_u32_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     u32 operand1 = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) >= (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -710,7 +710,7 @@ op_u64_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((u64) _r0)) >= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -718,7 +718,7 @@ op_u64_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) >= (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -735,7 +735,7 @@ op_f32_Equal_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) == (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Equal_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -744,7 +744,7 @@ op_f32_Equal_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) == (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Equal_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -752,7 +752,7 @@ op_f64_Equal_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) == (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Equal_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -769,7 +769,7 @@ op_f32_NotEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) != (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_NotEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -778,7 +778,7 @@ op_f32_NotEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) != (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_NotEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -786,7 +786,7 @@ op_f64_NotEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) != (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_NotEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -803,7 +803,7 @@ op_f32_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f32) _fp0)) < (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -811,7 +811,7 @@ op_f32_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) < (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -820,7 +820,7 @@ op_f32_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) < (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -828,7 +828,7 @@ op_f64_LessThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f64) _fp0)) < (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -836,7 +836,7 @@ op_f64_LessThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) < (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_LessThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -853,7 +853,7 @@ op_f32_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f32) _fp0)) > (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -861,7 +861,7 @@ op_f32_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) > (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -870,7 +870,7 @@ op_f32_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) > (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -878,7 +878,7 @@ op_f64_GreaterThan_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f64) _fp0)) > (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -886,7 +886,7 @@ op_f64_GreaterThan_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) > (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_GreaterThan_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -903,7 +903,7 @@ op_f32_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f32) _fp0)) <= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -911,7 +911,7 @@ op_f32_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) <= (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -920,7 +920,7 @@ op_f32_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) <= (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -928,7 +928,7 @@ op_f64_LessThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f64) _fp0)) <= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -936,7 +936,7 @@ op_f64_LessThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) <= (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_LessThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -953,7 +953,7 @@ op_f32_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f32) _fp0)) >= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -961,7 +961,7 @@ op_f32_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) >= (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -970,7 +970,7 @@ op_f32_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) >= (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -978,7 +978,7 @@ op_f64_GreaterThanOrEqual_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((f64) _fp0)) >= (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -986,7 +986,7 @@ op_f64_GreaterThanOrEqual_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) >= (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_GreaterThanOrEqual_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1003,7 +1003,7 @@ op_i32_Add_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) + (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Add_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1012,7 +1012,7 @@ op_i32_Add_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) + (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Add_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1020,7 +1020,7 @@ op_i64_Add_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) + (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Add_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1037,7 +1037,7 @@ op_i32_Multiply_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) * (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Multiply_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1046,7 +1046,7 @@ op_i32_Multiply_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) * (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Multiply_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1054,7 +1054,7 @@ op_i64_Multiply_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) * (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Multiply_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1071,7 +1071,7 @@ op_i32_Subtract_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i32) _r0)) - (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1079,7 +1079,7 @@ op_i32_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) - (((i32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Subtract_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1088,7 +1088,7 @@ op_i32_Subtract_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand1) - (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Subtract_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1096,7 +1096,7 @@ op_i64_Subtract_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((((i64) _r0)) - (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1104,7 +1104,7 @@ op_i64_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) - (((i64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Subtract_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1121,7 +1121,7 @@ op_u32_ShiftLeft_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((((u32) _r0))) << ((u32)((operand)) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_ShiftLeft_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1129,7 +1129,7 @@ op_u32_ShiftLeft_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand)) << ((u32)((((u32) _r0))) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_ShiftLeft_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1138,7 +1138,7 @@ op_u32_ShiftLeft_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     u32 operand1 = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand1)) << ((u32)((operand2)) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_ShiftLeft_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1146,7 +1146,7 @@ op_u64_ShiftLeft_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((((u64) _r0))) << ((u64)((operand)) % 64));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_ShiftLeft_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1154,7 +1154,7 @@ op_u64_ShiftLeft_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand)) << ((u64)((((u64) _r0))) % 64));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_ShiftLeft_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1171,7 +1171,7 @@ op_i32_ShiftRight_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((((i32) _r0))) >> ((u32)((operand)) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1179,7 +1179,7 @@ op_i32_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     i32 operand = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand)) >> ((u32)((((i32) _r0))) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_ShiftRight_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1188,7 +1188,7 @@ op_i32_ShiftRight_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand1)) >> ((u32)((operand2)) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_ShiftRight_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1196,7 +1196,7 @@ op_i64_ShiftRight_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((((i64) _r0))) >> ((u64)((operand)) % 64));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1204,7 +1204,7 @@ op_i64_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     i64 operand = * (i64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand)) >> ((u64)((((i64) _r0))) % 64));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_ShiftRight_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1221,7 +1221,7 @@ op_u32_ShiftRight_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((((u32) _r0))) >> ((u32)((operand)) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1229,7 +1229,7 @@ op_u32_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand)) >> ((u32)((((u32) _r0))) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_ShiftRight_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1238,7 +1238,7 @@ op_u32_ShiftRight_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     u32 operand1 = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand1)) >> ((u32)((operand2)) % 32));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_ShiftRight_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1246,7 +1246,7 @@ op_u64_ShiftRight_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((((u64) _r0))) >> ((u64)((operand)) % 64));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1254,7 +1254,7 @@ op_u64_ShiftRight_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = (((operand)) >> ((u64)((((u64) _r0))) % 64));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_ShiftRight_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1271,7 +1271,7 @@ op_u64_And_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) & (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_And_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1288,7 +1288,7 @@ op_u64_Or_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) | (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Or_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1305,7 +1305,7 @@ op_u64_Xor_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = ((operand) ^ (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Xor_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1322,7 +1322,7 @@ op_f32_Add_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) + (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Add_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1331,7 +1331,7 @@ op_f32_Add_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand1) + (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Add_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1339,7 +1339,7 @@ op_f64_Add_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) + (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Add_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1356,7 +1356,7 @@ op_f32_Multiply_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) * (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Multiply_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1365,7 +1365,7 @@ op_f32_Multiply_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand1) * (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Multiply_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1373,7 +1373,7 @@ op_f64_Multiply_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) * (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Multiply_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1390,7 +1390,7 @@ op_f32_Subtract_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((((f32) _fp0)) - (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1398,7 +1398,7 @@ op_f32_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) - (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Subtract_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1407,7 +1407,7 @@ op_f32_Subtract_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand1) - (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Subtract_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1415,7 +1415,7 @@ op_f64_Subtract_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((((f64) _fp0)) - (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1423,7 +1423,7 @@ op_f64_Subtract_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) - (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Subtract_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1440,7 +1440,7 @@ op_f32_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((((f32) _fp0)) / (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1448,7 +1448,7 @@ op_f32_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) / (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1457,7 +1457,7 @@ op_f32_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand1) / (operand2));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1465,7 +1465,7 @@ op_f64_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((((f64) _fp0)) / (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1473,7 +1473,7 @@ op_f64_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = ((operand) / (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1490,7 +1490,7 @@ op_u32_Rotl_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotl32((((u32) _r0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Rotl_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1498,7 +1498,7 @@ op_u32_Rotl_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotl32((operand), (((u32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Rotl_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1515,7 +1515,7 @@ op_u32_Rotr_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotr32((((u32) _r0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Rotr_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1523,7 +1523,7 @@ op_u32_Rotr_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u32 operand = * (u32 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotr32((operand), (((u32) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Rotr_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1540,7 +1540,7 @@ op_u64_Rotl_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotl64((((u64) _r0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Rotl_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1548,7 +1548,7 @@ op_u64_Rotl_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotl64((operand), (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Rotl_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1565,7 +1565,7 @@ op_u64_Rotr_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotr64((((u64) _r0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Rotr_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1573,7 +1573,7 @@ op_u64_Rotr_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
     u64 operand = * (u64 *) (_sp + * ((i32 *) _pc++));
     ((_r0)) = rotr64((operand), (((u64) _r0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Rotr_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1592,7 +1592,7 @@ op_u32_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = ((u32) _r0) / operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1602,7 +1602,7 @@ op_u32_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand / ((u32) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1623,7 +1623,7 @@ op_i32_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = ((i32) _r0) / operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1633,7 +1633,7 @@ op_i32_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand / ((i32) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1654,7 +1654,7 @@ op_u64_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = ((u64) _r0) / operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1664,7 +1664,7 @@ op_u64_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand / ((u64) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1685,7 +1685,7 @@ op_i64_Divide_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = ((i64) _r0) / operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1695,7 +1695,7 @@ op_i64_Divide_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
         return m3Err_trapDivisionByZero;
     (_r0) = operand / ((i64) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Divide_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1716,7 +1716,7 @@ op_u32_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = ((u32) _r0) % operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1726,7 +1726,7 @@ op_u32_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand % ((u32) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1747,7 +1747,7 @@ op_i32_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = ((i32) _r0) % operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1757,7 +1757,7 @@ op_i32_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand % ((i32) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1778,7 +1778,7 @@ op_u64_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = ((u64) _r0) % operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1788,7 +1788,7 @@ op_u64_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand % ((u64) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1809,7 +1809,7 @@ op_i64_Remainder_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = ((i64) _r0) % operand;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1819,7 +1819,7 @@ op_i64_Remainder_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapDivisionByZero;
     (_r0) = operand % ((i64) _r0);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Remainder_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1838,7 +1838,7 @@ op_f32_Min_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = min_f32((((f32) _fp0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Min_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1846,7 +1846,7 @@ op_f32_Min_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = min_f32((operand), (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Min_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1863,7 +1863,7 @@ op_f32_Max_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = max_f32((((f32) _fp0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Max_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1871,7 +1871,7 @@ op_f32_Max_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = max_f32((operand), (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Max_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1888,7 +1888,7 @@ op_f64_Min_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = min_f64((((f64) _fp0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Min_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1896,7 +1896,7 @@ op_f64_Min_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = min_f64((operand), (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Min_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1913,7 +1913,7 @@ op_f64_Max_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = max_f64((((f64) _fp0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Max_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1921,7 +1921,7 @@ op_f64_Max_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = max_f64((operand), (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Max_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1938,7 +1938,7 @@ op_f32_CopySign_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = copysignf((((f32) _fp0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_CopySign_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1946,7 +1946,7 @@ op_f32_CopySign_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f32 operand = * (f32 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = copysignf((operand), (((f32) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_CopySign_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1963,7 +1963,7 @@ op_f64_CopySign_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = copysign((((f64) _fp0)), (operand));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_CopySign_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1971,7 +1971,7 @@ op_f64_CopySign_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     f64 operand = * (f64 *) (_sp + * ((i32 *) _pc++));
     ((_fp0)) = copysign((operand), (((f64) _fp0)));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_CopySign_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -1987,7 +1987,7 @@ op_f32_Abs_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_fp0)) = fabsf((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Abs_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2002,7 +2002,7 @@ op_f64_Abs_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_fp0)) = fabs((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Abs_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2017,7 +2017,7 @@ op_f32_Ceil_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_fp0)) = ceilf((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Ceil_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2032,7 +2032,7 @@ op_f64_Ceil_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_fp0)) = ceil((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Ceil_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2047,7 +2047,7 @@ op_f32_Floor_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
 {
     ((_fp0)) = floorf((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Floor_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2062,7 +2062,7 @@ op_f64_Floor_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
 {
     ((_fp0)) = floor((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Floor_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2077,7 +2077,7 @@ op_f32_Trunc_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
 {
     ((_fp0)) = truncf((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Trunc_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2092,7 +2092,7 @@ op_f64_Trunc_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0
 {
     ((_fp0)) = trunc((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Trunc_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2107,7 +2107,7 @@ op_f32_Sqrt_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_fp0)) = sqrtf((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Sqrt_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2122,7 +2122,7 @@ op_f64_Sqrt_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_fp0)) = sqrt((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Sqrt_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2137,7 +2137,7 @@ op_f32_Nearest_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
 {
     ((_fp0)) = rintf((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Nearest_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2152,7 +2152,7 @@ op_f64_Nearest_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
 {
     ((_fp0)) = rint((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Nearest_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2167,7 +2167,7 @@ op_f32_Negate_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
 {
     ((_fp0)) = -((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Negate_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2182,7 +2182,7 @@ op_f64_Negate_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
 {
     ((_fp0)) = -((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Negate_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2197,7 +2197,7 @@ op_i32_EqualToZero_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
 {
     ((_r0)) = (((i32) _r0) == 0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_EqualToZero_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2212,7 +2212,7 @@ op_i64_EqualToZero_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
 {
     ((_r0)) = (((i64) _r0) == 0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_EqualToZero_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2227,7 +2227,7 @@ op_u32_Clz_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_r0)) = ((((u32) _r0) == 0) ? 32 : __builtin_clz((u32) _r0));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Clz_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2242,7 +2242,7 @@ op_u64_Clz_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_r0)) = ((((u64) _r0) == 0) ? 64 : __builtin_clzll((u64) _r0));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Clz_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2257,7 +2257,7 @@ op_u32_Ctz_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_r0)) = ((((u32) _r0) == 0) ? 32 : __builtin_ctz((u32) _r0));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Ctz_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2272,7 +2272,7 @@ op_u64_Ctz_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     ((_r0)) = ((((u64) _r0) == 0) ? 64 : __builtin_ctzll((u64) _r0));
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Ctz_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2287,7 +2287,7 @@ op_u32_Popcnt_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
 {
     ((_r0)) = __builtin_popcount((u32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Popcnt_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2302,7 +2302,7 @@ op_u64_Popcnt_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp
 {
     ((_r0)) = __builtin_popcountll((u64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Popcnt_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2317,7 +2317,7 @@ op_i32_Wrap_i64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
 {
     ((_r0)) = (((i32) _r0) & 0x00000000ffffffff);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Wrap_i64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2337,7 +2337,7 @@ op_i32_Trunc_f32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i32)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2350,7 +2350,7 @@ op_i32_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i32)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2363,7 +2363,7 @@ op_i32_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (i32)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Trunc_f32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2389,7 +2389,7 @@ op_u32_Trunc_f32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u32)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2402,7 +2402,7 @@ op_u32_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u32)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2415,7 +2415,7 @@ op_u32_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (u32)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Trunc_f32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2441,7 +2441,7 @@ op_i32_Trunc_f64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i32)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2454,7 +2454,7 @@ op_i32_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i32)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2467,7 +2467,7 @@ op_i32_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (i32)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Trunc_f64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2493,7 +2493,7 @@ op_u32_Trunc_f64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u32)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2506,7 +2506,7 @@ op_u32_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u32)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2519,7 +2519,7 @@ op_u32_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (u32)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u32_Trunc_f64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2545,7 +2545,7 @@ op_i64_Trunc_f32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i64)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2558,7 +2558,7 @@ op_i64_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i64)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2571,7 +2571,7 @@ op_i64_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (i64)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Trunc_f32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2597,7 +2597,7 @@ op_u64_Trunc_f32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u64)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2610,7 +2610,7 @@ op_u64_Trunc_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u64)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2623,7 +2623,7 @@ op_u64_Trunc_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (u64)(f32) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Trunc_f32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2649,7 +2649,7 @@ op_i64_Trunc_f64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i64)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2662,7 +2662,7 @@ op_i64_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (i64)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2675,7 +2675,7 @@ op_i64_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (i64)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Trunc_f64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2701,7 +2701,7 @@ op_u64_Trunc_f64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u64)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2714,7 +2714,7 @@ op_u64_Trunc_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (_r0) = (u64)(* stack);;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2727,7 +2727,7 @@ op_u64_Trunc_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
         return m3Err_trapIntegerOverflow;
     } (* dest) = (u64)(f64) _fp0;;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_u64_Trunc_f64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2748,7 +2748,7 @@ op_i64_Extend_i32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
 {
     _r0 = (i64) ((i32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Extend_i32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2763,7 +2763,7 @@ op_i64_Extend_u32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
 {
     _r0 = (i64) ((u32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Extend_u32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2778,7 +2778,7 @@ op_f32_Demote_f64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
 {
     _fp0 = (f32) ((f64) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Demote_f64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2793,7 +2793,7 @@ op_f64_Promote_f32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f6
 {
     _fp0 = (f64) ((f32) _fp0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Promote_f32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2808,14 +2808,14 @@ op_f64_Convert_i32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f64) ((i32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_i32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) ((i32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_i32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2823,7 +2823,7 @@ op_f64_Convert_i32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i32 from = * (i32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_i32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2838,14 +2838,14 @@ op_f64_Convert_u32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f64) ((u32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_u32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) ((u32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_u32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2853,7 +2853,7 @@ op_f64_Convert_u32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u32 from = * (u32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_u32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2868,14 +2868,14 @@ op_f64_Convert_i64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f64) ((i64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_i64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) ((i64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_i64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2883,7 +2883,7 @@ op_f64_Convert_i64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i64 from = * (i64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_i64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2898,14 +2898,14 @@ op_f64_Convert_u64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f64) ((u64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_u64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f64 *) (_sp + * ((i32 *) _pc++)) = (f64) ((u64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_u64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2913,7 +2913,7 @@ op_f64_Convert_u64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u64 from = * (u64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f64) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Convert_u64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2928,14 +2928,14 @@ op_f32_Convert_i32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f32) ((i32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_i32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) ((i32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_i32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2943,7 +2943,7 @@ op_f32_Convert_i32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i32 from = * (i32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_i32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2958,14 +2958,14 @@ op_f32_Convert_u32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f32) ((u32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_u32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) ((u32) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_u32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2973,7 +2973,7 @@ op_f32_Convert_u32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u32 from = * (u32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_u32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -2988,14 +2988,14 @@ op_f32_Convert_i64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f32) ((i64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_i64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) ((i64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_i64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3003,7 +3003,7 @@ op_f32_Convert_i64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     i64 from = * (i64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_i64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3018,14 +3018,14 @@ op_f32_Convert_u64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
 {
     _fp0 = (f32) ((u64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_u64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
 {
     * (f32 *) (_sp + * ((i32 *) _pc++)) = (f32) ((u64) _r0);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_u64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3033,7 +3033,7 @@ op_f32_Convert_u64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, 
     u64 from = * (u64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (f32) (from);
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Convert_u64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3053,7 +3053,7 @@ op_i32_Reinterpret_f32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (f32) _fp0;
     _r0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Reinterpret_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3065,7 +3065,7 @@ op_i32_Reinterpret_f32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = * (f32 *) (_sp + * ((i32 *) _pc++));
     _r0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Reinterpret_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3077,7 +3077,7 @@ op_i32_Reinterpret_f32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (f32) _fp0;
     * (i32 *) (_sp + * ((i32 *) _pc++)) = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i32_Reinterpret_f32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3101,7 +3101,7 @@ op_i64_Reinterpret_f64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (f64) _fp0;
     _r0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Reinterpret_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3113,7 +3113,7 @@ op_i64_Reinterpret_f64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = * (f64 *) (_sp + * ((i32 *) _pc++));
     _r0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Reinterpret_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3125,7 +3125,7 @@ op_i64_Reinterpret_f64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (f64) _fp0;
     * (i64 *) (_sp + * ((i32 *) _pc++)) = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_i64_Reinterpret_f64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3149,7 +3149,7 @@ op_f32_Reinterpret_i32_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (i32) _r0;
     _fp0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Reinterpret_i32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3161,7 +3161,7 @@ op_f32_Reinterpret_i32_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = * (i32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Reinterpret_i32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3173,7 +3173,7 @@ op_f32_Reinterpret_i32_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (i32) _r0;
     * (f32 *) (_sp + * ((i32 *) _pc++)) = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f32_Reinterpret_i32_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3197,7 +3197,7 @@ op_f64_Reinterpret_i64_r_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (i64) _r0;
     _fp0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Reinterpret_i64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3209,7 +3209,7 @@ op_f64_Reinterpret_i64_r_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = * (i64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Reinterpret_i64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3221,7 +3221,7 @@ op_f64_Reinterpret_i64_s_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _
     u.c = (i64) _r0;
     * (f64 *) (_sp + * ((i32 *) _pc++)) = u.t;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_f64_Reinterpret_i64_s_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3246,7 +3246,7 @@ op_Select_i32_rss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     _r0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_i32_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3256,7 +3256,7 @@ op_Select_i32_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     i32 operand1 = * (i32 *) (_sp + * ((i32 *) _pc++));
     _r0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_i32_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3266,7 +3266,7 @@ op_Select_i32_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     i32 operand1 = (i32) _r0;
     _r0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_i32_sss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3286,7 +3286,7 @@ op_Select_i64_rss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     i64 operand1 = * (i64 *) (_sp + * ((i32 *) _pc++));
     _r0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_i64_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3296,7 +3296,7 @@ op_Select_i64_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     i64 operand1 = * (i64 *) (_sp + * ((i32 *) _pc++));
     _r0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_i64_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3306,7 +3306,7 @@ op_Select_i64_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     i64 operand1 = (i64) _r0;
     _r0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_i64_sss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3326,7 +3326,7 @@ op_Select_f32_rss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f32_rrs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3336,7 +3336,7 @@ op_Select_f32_rrs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f32_rsr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3356,7 +3356,7 @@ op_Select_f32_sss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f32_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3366,7 +3366,7 @@ op_Select_f32_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f32 operand1 = * (f32 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f32_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3386,7 +3386,7 @@ op_Select_f64_rss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f64_rrs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3396,7 +3396,7 @@ op_Select_f64_rrs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f64_rsr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3416,7 +3416,7 @@ op_Select_f64_sss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f64_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3426,7 +3426,7 @@ op_Select_f64_srs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     f64 operand1 = * (f64 *) (_sp + * ((i32 *) _pc++));
     _fp0 = (condition) ? operand1 : operand2;
     return ((IM3Operation)(* _pc))(_pc + 1, _sp, _mem, _r0, _fp0);
-} 
+}
 
 static inline m3ret_t
 op_Select_f64_ssr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3650,7 +3650,7 @@ op_f32_Load_f32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f32_Load_f32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3684,7 +3684,7 @@ op_f64_Load_f64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f64_Load_f64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3718,7 +3718,7 @@ op_i32_Load_i8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Load_i8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3752,7 +3752,7 @@ op_i32_Load_u8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Load_u8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3786,7 +3786,7 @@ op_i32_Load_i16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Load_i16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3820,7 +3820,7 @@ op_i32_Load_u16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Load_u16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3854,7 +3854,7 @@ op_i32_Load_i32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Load_i32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3888,7 +3888,7 @@ op_i64_Load_i8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_i8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3922,7 +3922,7 @@ op_i64_Load_u8_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _f
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_u8_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3956,7 +3956,7 @@ op_i64_Load_i16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_i16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -3990,7 +3990,7 @@ op_i64_Load_u16_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_u16_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4024,7 +4024,7 @@ op_i64_Load_i32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_i32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4058,7 +4058,7 @@ op_i64_Load_u32_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_u32_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4092,7 +4092,7 @@ op_i64_Load_i64_r(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Load_i64_s(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4125,7 +4125,7 @@ op_f32_Store_f32_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f32_Store_f32_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4142,7 +4142,7 @@ op_f32_Store_f32_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f32_Store_f32_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4159,7 +4159,7 @@ op_f32_Store_f32_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f32_Store_f32_rr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4191,7 +4191,7 @@ op_f64_Store_f64_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f64_Store_f64_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4208,7 +4208,7 @@ op_f64_Store_f64_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f64_Store_f64_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4225,7 +4225,7 @@ op_f64_Store_f64_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_f64_Store_f64_rr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4257,7 +4257,7 @@ op_i32_Store_u8_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Store_u8_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4274,7 +4274,7 @@ op_i32_Store_u8_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Store_u8_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4307,7 +4307,7 @@ op_i32_Store_i16_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Store_i16_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4324,7 +4324,7 @@ op_i32_Store_i16_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Store_i16_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4357,7 +4357,7 @@ op_i32_Store_i32_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Store_i32_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4374,7 +4374,7 @@ op_i32_Store_i32_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i32_Store_i32_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4407,7 +4407,7 @@ op_i64_Store_u8_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_u8_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4424,7 +4424,7 @@ op_i64_Store_u8_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_u8_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4457,7 +4457,7 @@ op_i64_Store_i16_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_i16_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4474,7 +4474,7 @@ op_i64_Store_i16_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_i16_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4507,7 +4507,7 @@ op_i64_Store_i32_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_i32_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4524,7 +4524,7 @@ op_i64_Store_i32_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_i32_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4557,7 +4557,7 @@ op_i64_Store_i64_rs(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_i64_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4574,7 +4574,7 @@ op_i64_Store_i64_sr(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
     }
     else
         return m3Err_trapOutOfBoundsMemoryAccess;
-} 
+}
 
 static inline m3ret_t
 op_i64_Store_i64_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64 _fp0)
@@ -4593,8 +4593,7 @@ op_i64_Store_i64_ss(pc_t _pc, u64 * _sp, M3MemoryHeader * _mem, m3reg_t _r0, f64
         return m3Err_trapOutOfBoundsMemoryAccess;
 }
 
-enum
-{
+enum {
     c_waOp_block = 0x02,
     c_waOp_loop = 0x03,
     c_waOp_if = 0x04,
@@ -4608,15 +4607,15 @@ enum
     c_waOp_setLocal = 0x21,
     c_waOp_teeLocal = 0x22,
 };
+
 typedef struct M3BranchPatch
 {
     struct M3BranchPatch * next;
     pc_t * location;
-}
-M3BranchPatch;
+} M3BranchPatch;
 typedef M3BranchPatch * IM3BranchPatch;
-typedef struct M3CompilationScope
-{
+
+typedef struct M3CompilationScope {
     struct M3CompilationScope * outer;
     pc_t pc;
     IM3BranchPatch patches;
@@ -4625,12 +4624,11 @@ typedef struct M3CompilationScope
     u8 type;
     u8 opcode;
     bool isPolymorphic;
-}
-M3CompilationScope;
+} M3CompilationScope;
 typedef M3CompilationScope * IM3CompilationScope;
+
 static const u16 c_m3RegisterUnallocated = 0;
-typedef struct
-{
+typedef struct {
     IM3Runtime runtime;
     IM3Module module;
     bytes_t wasm;
@@ -4652,19 +4650,18 @@ typedef struct
     u16 numAllocatedExecSlots;
     u16 regStackIndexPlusOne [2];
     u8 previousOpcode;
-}
-M3Compilation;
+} M3Compilation;
 typedef M3Compilation * IM3Compilation;
+
 typedef M3Result (* M3Compiler) (IM3Compilation, u8);
-typedef struct M3OpInfo
-{
+typedef struct M3OpInfo {
     i8 stackOffset;
     u8 type;
     IM3Operation operations [4];
     M3Compiler compiler;
-}
-M3OpInfo;
+} M3OpInfo;
 typedef const M3OpInfo * IM3OpInfo;
+
 extern const M3OpInfo c_operations [];
 bool IsRegisterAllocated (IM3Compilation o, u32 i_register);
 bool IsRegisterLocation (i16 i_location);
@@ -4680,17 +4677,17 @@ M3Result Compile_BlockStatements (IM3Compilation io);
 M3Result Compile_Function (IM3Function io_function);
 bool PeekNextOpcode (IM3Compilation o, u8 i_opcode);
 u16 GetMaxExecSlot (IM3Compilation o);
-typedef struct M3FuncType
-{
+
+typedef struct M3FuncType {
     u32 numArgs;
     u8 argTypes [31];
     u8 returnType;
-}
-M3FuncType;
+} M3FuncType;
 typedef M3FuncType * IM3FuncType;
+
 void PrintFuncTypeSignature (IM3FuncType i_funcType);
-typedef struct M3Function
-{
+
+typedef struct M3Function {
     struct M3Module * module;
     M3ImportInfo import;
     bytes_t wasm;
@@ -4704,9 +4701,9 @@ typedef struct M3Function
     u16 numLocals;
     u16 numConstants;
     void * constants;
-}
-M3Function;
+} M3Function;
 typedef M3Function * IM3Function;
+
 cstr_t GetFunctionImportModuleName (IM3Function i_function);
 cstr_t GetFunctionName (IM3Function i_function);
 u32 GetFunctionNumArgs (IM3Function i_function);
@@ -4714,35 +4711,32 @@ u32 GetFunctionNumReturns (IM3Function i_function);
 u8 GetFunctionReturnType (IM3Function i_function);
 u32 GetFunctionNumArgsAndLocals (IM3Function i_function);
 cstr_t SPrintFunctionArgList (IM3Function i_function, m3stack_t i_sp);
-typedef struct M3MemoryInfo
-{
+
+typedef struct M3MemoryInfo {
     u32 initPages;
     u32 maxPages;
-}
-M3MemoryInfo;
-typedef struct M3Memory
-{
+} M3MemoryInfo;
+
+typedef struct M3Memory {
     M3MemoryHeader * mallocated;
     u32 numPages;
     u32 maxPages;
-}
-M3Memory;
+} M3Memory;
 typedef M3Memory * IM3Memory;
-typedef struct M3DataSegment
-{
+
+typedef struct M3DataSegment {
     const u8 * initExpr;
     const u8 * data;
     u32 initExprSize;
     u32 memoryRegion;
     u32 size;
-}
-M3DataSegment;
+} M3DataSegment;
+
 void FreeImportInfo (M3ImportInfo * i_info);
-typedef struct M3Global
-{
+
+typedef struct M3Global {
     M3ImportInfo import;
-    union
-    {
+    union {
         i64 intValue;
         f64 f64Value;
         f32 f32Value;
@@ -4752,11 +4746,10 @@ typedef struct M3Global
     u8 type;
     bool imported;
     bool isMutable;
-}
-M3Global;
+} M3Global;
 typedef M3Global * IM3Global;
-typedef struct M3Module
-{
+
+typedef struct M3Module {
     struct M3Runtime * runtime;
     cstr_t name;
     u32 numFuncTypes;
@@ -4779,20 +4772,19 @@ typedef struct M3Module
     M3MemoryInfo memoryInfo;
     bool memoryImported;
     struct M3Module * next;
-}
-M3Module;
+} M3Module;
 typedef M3Module * IM3Module;
+
 M3Result Module_AddGlobal (IM3Module io_module, IM3Global * o_global, u8 i_type, bool i_mutable, bool i_isImported);
 M3Result Module_AddFunction (IM3Module io_module, u32 i_typeIndex, IM3ImportInfo i_importInfo );
 IM3Function Module_GetFunction (IM3Module i_module, u32 i_functionIndex);
-typedef struct M3Environment
-{
+
+typedef struct M3Environment {
     u32 dummy;
-}
-M3Environment;
+} M3Environment;
 typedef M3Environment * IM3Environment;
-typedef struct M3Runtime
-{
+
+typedef struct M3Runtime {
     M3Compilation compilation;
     IM3Environment environment;
     M3CodePage * pagesOpen;
@@ -4811,9 +4803,9 @@ typedef struct M3Runtime
     M3ErrorInfo error;
     char error_message[256];
     i32 exit_code;
-}
-M3Runtime;
+} M3Runtime;
 typedef M3Runtime * IM3Runtime;
+
 void InitRuntime (IM3Runtime io_runtime, u32 i_stackSizeInBytes);
 void ReleaseRuntime (IM3Runtime io_runtime);
 M3Result ResizeMemory (IM3Runtime io_runtime, u32 i_numPages);
@@ -4823,7 +4815,9 @@ void * v_FindFunction (IM3Module i_module, const char * const i_name);
 IM3CodePage AcquireCodePage (IM3Runtime io_runtime);
 IM3CodePage AcquireCodePageWithCapacity (IM3Runtime io_runtime, u32 i_slotCount);
 void ReleaseCodePage (IM3Runtime io_runtime, IM3CodePage i_codePage);
-M3Result m3Error (M3Result i_result, IM3Runtime i_runtime, IM3Module i_module, IM3Function i_function, const char * const i_file, u32 i_lineNum, const char * const i_errorMessage, ...);
+M3Result m3Error (M3Result i_result, IM3Runtime i_runtime, IM3Module i_module,
+                  IM3Function i_function, const char * const i_file, u32 i_lineNum,
+                  const char * const i_errorMessage, ...);
 M3Result BridgeToNewPageIfNecessary (IM3Compilation o);
 M3Result EnsureCodePageNumLines (IM3Compilation o, u32 i_numLines);
 M3Result EmitOp (IM3Compilation o, IM3Operation i_operation);
@@ -5092,7 +5086,7 @@ M3Result PreserveNonTopRegisters (IM3Compilation o)
             }
         }
     }
-    _catch:
+_catch:
     return result;
 }
 
@@ -5156,7 +5150,7 @@ M3Result UnwindBlockStack (IM3Compilation o)
     }
     if (popCount) {}
 
-    _catch:
+_catch:
     return result;
 }
 
@@ -5173,7 +5167,7 @@ M3Result _PushAllocatedSlotAndEmit (IM3Compilation o, u8 i_m3Type, bool i_doEmit
     }
     else
         result = m3Err_functionStackOverflow;
-    _catch:
+_catch:
     return result;
 }
 
@@ -5217,7 +5211,7 @@ M3Result PushConst (IM3Compilation o, u64 i_word, u8 i_m3Type)
             if (result) { goto _catch; }
         }
     }
-    _catch:
+_catch:
     return result;
 }
 
@@ -5248,7 +5242,7 @@ M3Result AcquirePatch (IM3Compilation o, IM3BranchPatch * o_patch)
         if (result) { goto _catch; }
     }
     * o_patch = patch;
-    _catch:
+_catch:
     return result;
 }
 
@@ -5288,7 +5282,7 @@ M3Result CopyTopSlot (IM3Compilation o, u16 i_destSlot)
     EmitSlotOffset (o, i_destSlot);
     if (IsStackTopInSlot (o))
         EmitSlotOffset (o, GetStackTopSlotIndex (o));
-    _catch:
+_catch:
     return result;
 }
 
@@ -5315,7 +5309,7 @@ M3Result PreservedCopyTopSlot (IM3Compilation o, u16 i_destSlot, u16 i_preserveS
     if (IsStackTopInSlot (o))
         EmitSlotOffset (o, GetStackTopSlotIndex (o));
     EmitSlotOffset (o, i_preserveSlot);
-    _catch:
+_catch:
     return result;
 }
 
@@ -5336,7 +5330,7 @@ M3Result MoveStackTopToRegister (IM3Compilation o)
         if (result) { goto _catch; }
         result = EmitTopSlotAndPop (o);
         if (result) { goto _catch; }
-        result = PushRegister (o, type); 
+        result = PushRegister (o, type);
         if (result) { goto _catch; }
     }
 _catch:
@@ -5347,8 +5341,7 @@ M3Result ReturnStackTop (IM3Compilation o)
 {
     M3Result result = m3Err_none;
     i16 top = GetStackTopIndex (o);
-    if (top >= 0)
-    {
+    if (top >= 0) {
         const u16 returnSlot = 0;
         if (o->wasmStack [top] != returnSlot)
             CopyTopSlot (o, returnSlot);
