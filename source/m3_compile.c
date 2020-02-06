@@ -6,6 +6,21 @@
 #include <limits.h>
 #include <math.h>
 
+# define d_m3LogOutput 1
+# define d_m3LogCompile         1
+
+# define d_m3LogParse           0
+# define d_m3LogWasmStack       0
+# define d_m3LogEmit            0
+# define d_m3LogCodePages       0
+# define d_m3LogModule          0
+# define d_m3LogRuntime         0
+# define d_m3LogExec            0
+# define d_m3LogStackTrace      0
+# define d_m3LogNativeStack     0
+
+#define d_indent "     | "
+
 typedef const char * M3Result;
 struct M3Environment; typedef struct M3Environment * IM3Environment;
 struct M3Runtime; typedef struct M3Runtime * IM3Runtime;
@@ -139,6 +154,78 @@ typedef
 const void * const cvptr_t;
 typedef void * code_t;
 typedef code_t const * pc_t;
+
+# define d_m3Log_parse d_m3LogParse         // required for m3logif
+# define d_m3Log_stack d_m3LogWasmStack
+# define d_m3Log_runtime d_m3LogRuntime
+# define d_m3Log_exec d_m3LogExec
+# define d_m3Log_emit d_m3LogEmit
+
+# if d_m3LogOutput && defined (DEBUG)
+
+#   define d_m3Log(CATEGORY, FMT, ...)                  printf (" %8s  |  " FMT, #CATEGORY, ##__VA_ARGS__);
+
+#   if d_m3LogParse
+#       define m3log_parse(CATEGORY, FMT, ...)          d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_parse(...) {}
+#   endif
+
+#   if d_m3LogCompile
+#       define m3log_compile(CATEGORY, FMT, ...)        d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_compile(...) {}
+#   endif
+
+#   if d_m3LogWasmStack
+#       define m3log_stack(CATEGORY, FMT, ...)          d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_stack(...) {}
+#   endif
+
+#   if d_m3LogEmit
+#       define m3log_emit(CATEGORY, FMT, ...)           d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_emit(...) {}
+#   endif
+
+#   if d_m3LogCodePages
+#       define m3log_code(CATEGORY, FMT, ...)           d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_code(...) {}
+#   endif
+
+#   if d_m3LogModule
+#       define m3log_module(CATEGORY, FMT, ...)         d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_module(...) {}
+#   endif
+
+#   if d_m3LogRuntime
+#       define m3log_runtime(CATEGORY, FMT, ...)        d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_runtime(...) {}
+#   endif
+
+#   if d_m3LogExec
+#       define m3log_exec(CATEGORY, FMT, ...)           d_m3Log(CATEGORY, FMT, ##__VA_ARGS__)
+#   else
+#       define m3log_exec(...) {}
+#   endif
+
+#   define m3log(CATEGORY, FMT, ...)                    m3log_##CATEGORY (CATEGORY, FMT "\n", ##__VA_ARGS__)
+#   define m3logif(CATEGORY, STATEMENT)                 m3log_##CATEGORY (CATEGORY, ""); if (d_m3Log_##CATEGORY) { STATEMENT; printf ("\n"); }
+# else
+#   define m3log(CATEGORY, FMT, ...)                    {}
+#   define m3logif(CATEGORY, STATEMENT)                 {}
+# endif
+
+# ifdef DEBUG
+#   define d_m3Assert(ASS)      assert (ASS)
+# else
+#   define d_m3Assert(ASS)
+# endif
+
 typedef struct M3MemoryHeader
 {
     IM3Runtime runtime;
@@ -4655,6 +4742,7 @@ typedef M3Compilation * IM3Compilation;
 
 typedef M3Result (* M3Compiler) (IM3Compilation, u8);
 typedef struct M3OpInfo {
+    char *name;
     i8 stackOffset;
     u8 type;
     IM3Operation operations [4];
@@ -5110,6 +5198,7 @@ M3Result Push (IM3Compilation o, u8 i_m3Type, i16 i_location)
             u32 regSelect = IsFpRegisterLocation (i_location);
             AllocateRegister (o, regSelect, stackIndex);
         }
+        m3logif (stack, dump_type_stack (o))
     }
     else
         result = m3Err_functionStackOverflow;
@@ -5135,6 +5224,8 @@ M3Result Pop (IM3Compilation o)
         else if (location >= o->firstSlotIndex) {
             DeallocateSlot (o, location);
         }
+
+        m3logif (stack, dump_type_stack (o))
     }
     else if (! IsStackPolymorphic (o))
         result = m3Err_functionStackUnderrun;
@@ -5152,7 +5243,9 @@ M3Result UnwindBlockStack (IM3Compilation o)
         if (result) { goto _catch; }
         ++popCount;
     }
-    if (popCount) {}
+    if (popCount) {
+        m3log (compile, "unwound stack top: %d", popCount)
+    }
 
 _catch:
     return result;
@@ -5258,6 +5351,7 @@ bool PatchBranches (IM3Compilation o)
     IM3BranchPatch patches = block->patches;
     IM3BranchPatch endPatch = patches;
     while (patches) {
+        m3log (compile, "patching location: %p to pc: %p", patches->location, pc);
         * (patches->location) = pc;
         endPatch = patches;
         patches = patches->next;
@@ -5404,6 +5498,9 @@ M3Result Compile_Const_i32 (IM3Compilation o, u8 i_opcode)
     i32 value;
     result = ReadLEB_i32 (& value, & o->wasm, o->wasmEnd);
     if (result) { goto _catch; }
+
+    m3log (compile, d_indent "%s (const i32 = %" PRIi32 ")", get_indention_string (o), value);
+
     result = PushConst (o, value, c_m3Type_i32);
     if (result) { goto _catch; }
 _catch:
@@ -5416,6 +5513,9 @@ M3Result Compile_Const_i64 (IM3Compilation o, u8 i_opcode)
     i64 value;
     result = ReadLEB_i64 (& value, & o->wasm, o->wasmEnd);
     if (result) { goto _catch; }
+
+    m3log (compile, d_indent "%s (const i64 = %" PRIi64 ")", get_indention_string (o), value);
+
     result = PushConst (o, value, c_m3Type_i64);
     if (result) { goto _catch; }
 _catch:
@@ -5428,6 +5528,9 @@ M3Result Compile_Const_f32 (IM3Compilation o, u8 i_opcode)
     f32 value;
     result = Read_f32 (& value, & o->wasm, o->wasmEnd);
     if (result) { goto _catch; }
+
+    m3log (compile, d_indent "%s (const f32 = %f)", get_indention_string (o), value);
+
     union { u64 u; f32 f; } union64;
     union64.f = value;
     result = PushConst (o, union64.u, c_m3Type_f32);
@@ -5442,6 +5545,9 @@ M3Result Compile_Const_f64 (IM3Compilation o, u8 i_opcode)
     f64 value;
     result = Read_f64 (& value, & o->wasm, o->wasmEnd);
     if (result) { goto _catch; }
+
+    m3log (compile, d_indent "%s (const f64 = %lf)", get_indention_string (o), value);
+
     union { u64 u; f64 f; } union64;
     union64.f = value;
     result = PushConst (o, union64.u, c_m3Type_f64);
@@ -5816,6 +5922,8 @@ M3Result Compile_Call (IM3Compilation o, u8 i_opcode)
         if (result) { goto _catch; }
         IM3Function function = Module_GetFunction (o->module, functionIndex);
         if (function) {
+            m3log (compile, d_indent "%s (func= '%s'; args= %d)",
+                   get_indention_string (o), GetFunctionName (function), function->funcType->numArgs);
             if (function->module) {
                 u16 slotTop;
                 result = CompileCallArgsReturn (o, & slotTop, function->funcType, false);
@@ -6307,186 +6415,200 @@ _catch:
 
 const M3OpInfo c_operations [] =
 {
-    { 0, c_m3Type_none, { op_Unreachable, NULL, NULL, NULL }, Compile_Unreachable },
-    { 0, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_Nop },
-    { 0, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_LoopOrBlock },
-    { 0, c_m3Type_none, { op_Loop, NULL, NULL, NULL }, Compile_LoopOrBlock },
-    { -1, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_If },
-    { 0, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_Nop },
-    { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
-    { 0, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_End },
-    { 0, c_m3Type_none, { op_Branch, NULL, NULL, NULL }, Compile_Branch },
-    { -1, c_m3Type_none, { op_BranchIf_r, op_BranchIf_s }, Compile_Branch },
-    { -1, c_m3Type_none, { op_BranchTable, NULL, NULL, NULL }, Compile_BranchTable },
-    { 0, (u8)-1, { op_Return, NULL, NULL, NULL }, Compile_Return },
-    { 0, (u8)-1, { op_Call, NULL, NULL, NULL }, Compile_Call },
-    { 0, (u8)-1, { op_CallIndirect, NULL, NULL, NULL }, Compile_CallIndirect },
-    { 0, (u8)-1, { NULL, NULL, NULL, NULL }, Compile_Call },
-    { 0, (u8)-1, { NULL, NULL, NULL, NULL }, Compile_CallIndirect },
-    { 0 }, { 0 },
-    { 0 }, { 0 }, { 0 }, { 0 },
-    { -1, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_Drop },
-    { -2, (u8)-1, { NULL, NULL, NULL, NULL }, Compile_Select },
-    { 0 }, { 0 }, { 0 }, { 0 },
-    { 1, (u8)-1, { NULL, NULL, NULL, NULL }, Compile_GetLocal },
-    { 1, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_SetLocal },
-    { 0, (u8)-1, { NULL, NULL, NULL, NULL }, Compile_SetLocal },
-    { 1, c_m3Type_none, { op_GetGlobal, NULL, NULL, NULL }, Compile_GetSetGlobal },
-    { 1, c_m3Type_none, { NULL, NULL, NULL, NULL }, Compile_GetSetGlobal },
-    { 0 }, { 0 }, { 0 },
-    { 0, c_m3Type_i32, { op_i32_Load_i32_r, op_i32_Load_i32_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_i64_r, op_i64_Load_i64_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_f32, { op_f32_Load_f32_r, op_f32_Load_f32_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_f64, { op_f64_Load_f64_r, op_f64_Load_f64_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i32, { op_i32_Load_i8_r, op_i32_Load_i8_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i32, { op_i32_Load_u8_r, op_i32_Load_u8_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i32, { op_i32_Load_i16_r, op_i32_Load_i16_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i32, { op_i32_Load_u16_r, op_i32_Load_u16_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_i8_r, op_i64_Load_i8_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_u8_r, op_i64_Load_u8_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_i16_r, op_i64_Load_i16_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_u16_r, op_i64_Load_u16_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_i32_r, op_i64_Load_i32_s, NULL, NULL }, Compile_Load_Store },
-    { 0, c_m3Type_i64, { op_i64_Load_u32_r, op_i64_Load_u32_s, NULL, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i32_Store_i32_rs, op_i32_Store_i32_sr, op_i32_Store_i32_ss, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i64_Store_i64_rs, op_i64_Store_i64_sr, op_i64_Store_i64_ss, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_f32_Store_f32_rs, op_f32_Store_f32_sr, op_f32_Store_f32_ss, op_f32_Store_f32_rr }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_f64_Store_f64_rs, op_f64_Store_f64_sr, op_f64_Store_f64_ss, op_f64_Store_f64_rr }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i32_Store_u8_rs, op_i32_Store_u8_sr, op_i32_Store_u8_ss, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i32_Store_i16_rs, op_i32_Store_i16_sr, op_i32_Store_i16_ss, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i64_Store_u8_rs, op_i64_Store_u8_sr, op_i64_Store_u8_ss, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i64_Store_i16_rs, op_i64_Store_i16_sr, op_i64_Store_i16_ss, NULL }, Compile_Load_Store },
-    { -2, c_m3Type_none, { op_i64_Store_i32_rs, op_i64_Store_i32_sr, op_i64_Store_i32_ss, NULL }, Compile_Load_Store },
-    { 1, c_m3Type_i32, { op_MemCurrent, NULL, NULL, NULL }, Compile_Memory_Current },
-    { 1, c_m3Type_i32, { op_MemGrow, NULL, NULL, NULL }, Compile_Memory_Grow },
-    { 1, c_m3Type_i32, { NULL, NULL, NULL, NULL }, Compile_Const_i32 },
-    { 1, c_m3Type_i64, { NULL, NULL, NULL, NULL }, Compile_Const_i64 },
-    { 1, c_m3Type_f32, { NULL, NULL, NULL, NULL }, Compile_Const_f32 },
-    { 1, c_m3Type_f64, { NULL, NULL, NULL, NULL }, Compile_Const_f64 },
-    { 0, c_m3Type_i32, { op_i32_EqualToZero_r, op_i32_EqualToZero_s, NULL, NULL } },
-    { -1, c_m3Type_i32, { op_i32_Equal_rs, NULL, op_i32_Equal_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_NotEqual_rs, NULL, op_i32_NotEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_LessThan_rs, op_i32_LessThan_sr, op_i32_LessThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_LessThan_rs, op_u32_LessThan_sr, op_u32_LessThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_GreaterThan_rs, op_i32_GreaterThan_sr, op_i32_GreaterThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_GreaterThan_rs, op_u32_GreaterThan_sr, op_u32_GreaterThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_LessThanOrEqual_rs, op_i32_LessThanOrEqual_sr, op_i32_LessThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_LessThanOrEqual_rs, op_u32_LessThanOrEqual_sr, op_u32_LessThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_GreaterThanOrEqual_rs, op_i32_GreaterThanOrEqual_sr, op_i32_GreaterThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_GreaterThanOrEqual_rs, op_u32_GreaterThanOrEqual_sr, op_u32_GreaterThanOrEqual_ss, NULL } },
-    { 0, c_m3Type_i32, { op_i64_EqualToZero_r, op_i64_EqualToZero_s, NULL, NULL } },
-    { -1, c_m3Type_i32, { op_i64_Equal_rs, NULL, op_i64_Equal_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i64_NotEqual_rs, NULL, op_i64_NotEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i64_LessThan_rs, op_i64_LessThan_sr, op_i64_LessThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_LessThan_rs, op_u64_LessThan_sr, op_u64_LessThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i64_GreaterThan_rs, op_i64_GreaterThan_sr, op_i64_GreaterThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_GreaterThan_rs, op_u64_GreaterThan_sr, op_u64_GreaterThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i64_LessThanOrEqual_rs, op_i64_LessThanOrEqual_sr, op_i64_LessThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_LessThanOrEqual_rs, op_u64_LessThanOrEqual_sr, op_u64_LessThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i64_GreaterThanOrEqual_rs, op_i64_GreaterThanOrEqual_sr, op_i64_GreaterThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_GreaterThanOrEqual_rs, op_u64_GreaterThanOrEqual_sr, op_u64_GreaterThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f32_Equal_rs, NULL, op_f32_Equal_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f32_NotEqual_rs, NULL, op_f32_NotEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f32_LessThan_rs, op_f32_LessThan_sr, op_f32_LessThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f32_GreaterThan_rs, op_f32_GreaterThan_sr, op_f32_GreaterThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f32_LessThanOrEqual_rs, op_f32_LessThanOrEqual_sr, op_f32_LessThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f32_GreaterThanOrEqual_rs, op_f32_GreaterThanOrEqual_sr, op_f32_GreaterThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f64_Equal_rs, NULL, op_f64_Equal_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f64_NotEqual_rs, NULL, op_f64_NotEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f64_LessThan_rs, op_f64_LessThan_sr, op_f64_LessThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f64_GreaterThan_rs, op_f64_GreaterThan_sr, op_f64_GreaterThan_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f64_LessThanOrEqual_rs, op_f64_LessThanOrEqual_sr, op_f64_LessThanOrEqual_ss, NULL } },
-    { -1, c_m3Type_i32, { op_f64_GreaterThanOrEqual_rs, op_f64_GreaterThanOrEqual_sr, op_f64_GreaterThanOrEqual_ss, NULL } },
-    { 0, c_m3Type_i32, { op_u32_Clz_r, op_u32_Clz_s, NULL, NULL } },
-    { 0, c_m3Type_i32, { op_u32_Ctz_r, op_u32_Ctz_s, NULL, NULL } },
-    { 0, c_m3Type_i32, { op_u32_Popcnt_r, op_u32_Popcnt_s, NULL, NULL } },
-    { -1, c_m3Type_i32, { op_i32_Add_rs, NULL, op_i32_Add_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_Subtract_rs, op_i32_Subtract_sr, op_i32_Subtract_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_Multiply_rs, NULL, op_i32_Multiply_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_Divide_rs, op_i32_Divide_sr, op_i32_Divide_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_Divide_rs, op_u32_Divide_sr, op_u32_Divide_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_Remainder_rs, op_i32_Remainder_sr, op_i32_Remainder_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_Remainder_rs, op_u32_Remainder_sr, op_u32_Remainder_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_And_rs, NULL, op_u64_And_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_Or_rs, NULL, op_u64_Or_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u64_Xor_rs, NULL, op_u64_Xor_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_ShiftLeft_rs, op_u32_ShiftLeft_sr, op_u32_ShiftLeft_ss, NULL } },
-    { -1, c_m3Type_i32, { op_i32_ShiftRight_rs, op_i32_ShiftRight_sr, op_i32_ShiftRight_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_ShiftRight_rs, op_u32_ShiftRight_sr, op_u32_ShiftRight_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_Rotl_rs, op_u32_Rotl_sr, op_u32_Rotl_ss, NULL } },
-    { -1, c_m3Type_i32, { op_u32_Rotr_rs, op_u32_Rotr_sr, op_u32_Rotr_ss, NULL } },
-    { 0, c_m3Type_i64, { op_u64_Clz_r, op_u64_Clz_s, NULL, NULL } },
-    { 0, c_m3Type_i64, { op_u64_Ctz_r, op_u64_Ctz_s, NULL, NULL } },
-    { 0, c_m3Type_i64, { op_u64_Popcnt_r, op_u64_Popcnt_s, NULL, NULL } },
-    { -1, c_m3Type_i64, { op_i64_Add_rs, NULL, op_i64_Add_ss, NULL } },
-    { -1, c_m3Type_i64, { op_i64_Subtract_rs, op_i64_Subtract_sr, op_i64_Subtract_ss, NULL } },
-    { -1, c_m3Type_i64, { op_i64_Multiply_rs, NULL, op_i64_Multiply_ss, NULL } },
-    { -1, c_m3Type_i64, { op_i64_Divide_rs, op_i64_Divide_sr, op_i64_Divide_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_Divide_rs, op_u64_Divide_sr, op_u64_Divide_ss, NULL } },
-    { -1, c_m3Type_i64, { op_i64_Remainder_rs, op_i64_Remainder_sr, op_i64_Remainder_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_Remainder_rs, op_u64_Remainder_sr, op_u64_Remainder_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_And_rs, NULL, op_u64_And_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_Or_rs, NULL, op_u64_Or_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_Xor_rs, NULL, op_u64_Xor_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_ShiftLeft_rs, op_u64_ShiftLeft_sr, op_u64_ShiftLeft_ss, NULL } },
-    { -1, c_m3Type_i64, { op_i64_ShiftRight_rs, op_i64_ShiftRight_sr, op_i64_ShiftRight_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_ShiftRight_rs, op_u64_ShiftRight_sr, op_u64_ShiftRight_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_Rotl_rs, op_u64_Rotl_sr, op_u64_Rotl_ss, NULL } },
-    { -1, c_m3Type_i64, { op_u64_Rotr_rs, op_u64_Rotr_sr, op_u64_Rotr_ss, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Abs_r, op_f32_Abs_s, NULL, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Negate_r, op_f32_Negate_s, NULL, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Ceil_r, op_f32_Ceil_s, NULL, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Floor_r, op_f32_Floor_s, NULL, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Trunc_r, op_f32_Trunc_s, NULL, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Nearest_r, op_f32_Nearest_s, NULL, NULL } },
-    { 0, c_m3Type_f32, { op_f32_Sqrt_r, op_f32_Sqrt_s, NULL, NULL } },
-    { -1, c_m3Type_f32, { op_f32_Add_rs, NULL, op_f32_Add_ss, NULL } },
-    { -1, c_m3Type_f32, { op_f32_Subtract_rs, op_f32_Subtract_sr, op_f32_Subtract_ss, NULL } },
-    { -1, c_m3Type_f32, { op_f32_Multiply_rs, NULL, op_f32_Multiply_ss, NULL } },
-    { -1, c_m3Type_f32, { op_f32_Divide_rs, op_f32_Divide_sr, op_f32_Divide_ss, NULL } },
-    { -1, c_m3Type_f32, { op_f32_Min_rs, NULL, op_f32_Min_ss, NULL } },
-    { -1, c_m3Type_f32, { op_f32_Max_rs, NULL, op_f32_Max_ss, NULL } },
-    { -1, c_m3Type_f32, { op_f32_CopySign_rs, op_f32_CopySign_sr, op_f32_CopySign_ss, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Abs_r, op_f64_Abs_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Negate_r, op_f64_Negate_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Ceil_r, op_f64_Ceil_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Floor_r, op_f64_Floor_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Trunc_r, op_f64_Trunc_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Nearest_r, op_f64_Nearest_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Sqrt_r, op_f64_Sqrt_s, NULL, NULL } },
-    { -1, c_m3Type_f64, { op_f64_Add_rs, NULL, op_f64_Add_ss, NULL } },
-    { -1, c_m3Type_f64, { op_f64_Subtract_rs, op_f64_Subtract_sr, op_f64_Subtract_ss, NULL } },
-    { -1, c_m3Type_f64, { op_f64_Multiply_rs, NULL, op_f64_Multiply_ss, NULL } },
-    { -1, c_m3Type_f64, { op_f64_Divide_rs, op_f64_Divide_sr, op_f64_Divide_ss, NULL } },
-    { -1, c_m3Type_f64, { op_f64_Min_rs, NULL, op_f64_Min_ss, NULL } },
-    { -1, c_m3Type_f64, { op_f64_Max_rs, NULL, op_f64_Max_ss, NULL } },
-    { -1, c_m3Type_f64, { op_f64_CopySign_rs, op_f64_CopySign_sr, op_f64_CopySign_ss, NULL } },
-    { 0, c_m3Type_i32, { op_i32_Wrap_i64_r, op_i32_Wrap_i64_s, NULL, NULL } },
-    { 0, c_m3Type_i32, { op_i32_Trunc_f32_r_r, op_i32_Trunc_f32_r_s, op_i32_Trunc_f32_s_r, op_i32_Trunc_f32_s_s }, Compile_Convert },
-    { 0, c_m3Type_i32, { op_u32_Trunc_f32_r_r, op_u32_Trunc_f32_r_s, op_u32_Trunc_f32_s_r, op_u32_Trunc_f32_s_s }, Compile_Convert },
-    { 0, c_m3Type_i32, { op_i32_Trunc_f64_r_r, op_i32_Trunc_f64_r_s, op_i32_Trunc_f64_s_r, op_i32_Trunc_f64_s_s }, Compile_Convert },
-    { 0, c_m3Type_i32, { op_u32_Trunc_f64_r_r, op_u32_Trunc_f64_r_s, op_u32_Trunc_f64_s_r, op_u32_Trunc_f64_s_s }, Compile_Convert },
-    { 0, c_m3Type_i64, { op_i64_Extend_i32_r, op_i64_Extend_i32_s, NULL, NULL } },
-    { 0, c_m3Type_i64, { op_i64_Extend_u32_r, op_i64_Extend_u32_s, NULL, NULL } },
-    { 0, c_m3Type_i64, { op_i64_Trunc_f32_r_r, op_i64_Trunc_f32_r_s, op_i64_Trunc_f32_s_r, op_i64_Trunc_f32_s_s }, Compile_Convert },
-    { 0, c_m3Type_i64, { op_u64_Trunc_f32_r_r, op_u64_Trunc_f32_r_s, op_u64_Trunc_f32_s_r, op_u64_Trunc_f32_s_s }, Compile_Convert },
-    { 0, c_m3Type_i64, { op_i64_Trunc_f64_r_r, op_i64_Trunc_f64_r_s, op_i64_Trunc_f64_s_r, op_i64_Trunc_f64_s_s }, Compile_Convert },
-    { 0, c_m3Type_i64, { op_u64_Trunc_f64_r_r, op_u64_Trunc_f64_r_s, op_u64_Trunc_f64_s_r, op_u64_Trunc_f64_s_s }, Compile_Convert },
-    { 0, c_m3Type_f32, { op_f32_Convert_i32_r_r, op_f32_Convert_i32_r_s, op_f32_Convert_i32_s_r, op_f32_Convert_i32_s_s }, Compile_Convert },
-    { 0, c_m3Type_f32, { op_f32_Convert_u32_r_r, op_f32_Convert_u32_r_s, op_f32_Convert_u32_s_r, op_f32_Convert_u32_s_s }, Compile_Convert },
-    { 0, c_m3Type_f32, { op_f32_Convert_i64_r_r, op_f32_Convert_i64_r_s, op_f32_Convert_i64_s_r, op_f32_Convert_i64_s_s }, Compile_Convert },
-    { 0, c_m3Type_f32, { op_f32_Convert_u64_r_r, op_f32_Convert_u64_r_s, op_f32_Convert_u64_s_r, op_f32_Convert_u64_s_s }, Compile_Convert },
-    { 0, c_m3Type_f32, { op_f32_Demote_f64_r, op_f32_Demote_f64_s, NULL, NULL } },
-    { 0, c_m3Type_f64, { op_f64_Convert_i32_r_r, op_f64_Convert_i32_r_s, op_f64_Convert_i32_s_r, op_f64_Convert_i32_s_s }, Compile_Convert },
-    { 0, c_m3Type_f64, { op_f64_Convert_u32_r_r, op_f64_Convert_u32_r_s, op_f64_Convert_u32_s_r, op_f64_Convert_u32_s_s }, Compile_Convert },
-    { 0, c_m3Type_f64, { op_f64_Convert_i64_r_r, op_f64_Convert_i64_r_s, op_f64_Convert_i64_s_r, op_f64_Convert_i64_s_s }, Compile_Convert },
-    { 0, c_m3Type_f64, { op_f64_Convert_u64_r_r, op_f64_Convert_u64_r_s, op_f64_Convert_u64_s_r, op_f64_Convert_u64_s_s }, Compile_Convert },
-    { 0, c_m3Type_f64, { op_f64_Promote_f32_r, op_f64_Promote_f32_s, NULL, NULL } },
-    { 0, c_m3Type_i32, { op_i32_Reinterpret_f32_r_r, op_i32_Reinterpret_f32_r_s, op_i32_Reinterpret_f32_s_r, op_i32_Reinterpret_f32_s_s }, Compile_Convert },
-    { 0, c_m3Type_i64, { op_i64_Reinterpret_f64_r_r, op_i64_Reinterpret_f64_r_s, op_i64_Reinterpret_f64_s_r, op_i64_Reinterpret_f64_s_s }, Compile_Convert },
-    { 0, c_m3Type_f32, { op_f32_Reinterpret_i32_r_r, op_f32_Reinterpret_i32_r_s, op_f32_Reinterpret_i32_s_r, op_f32_Reinterpret_i32_s_s }, Compile_Convert },
-    { 0, c_m3Type_f64, { op_f64_Reinterpret_i64_r_r, op_f64_Reinterpret_i64_r_s, op_f64_Reinterpret_i64_s_r, op_f64_Reinterpret_i64_s_s }, Compile_Convert },
-    { 0, c_m3Type_void }
+    { "unreachable", 0, c_m3Type_none, { op_Unreachable, ((void *)0), ((void *)0), ((void *)0) }, Compile_Unreachable },
+    { "nop", 0, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Nop },
+    { "block", 0, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_LoopOrBlock },
+    { "loop", 0, c_m3Type_none, { op_Loop, ((void *)0), ((void *)0), ((void *)0) }, Compile_LoopOrBlock },
+    { "if", -1, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_If },
+    { "else", 0, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Nop },
+    { "reserved" }, { "reserved" }, { "reserved" }, { "reserved" }, { "reserved" },
+    { "end", 0, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_End },
+    { "br", 0, c_m3Type_none, { op_Branch, ((void *)0), ((void *)0), ((void *)0) }, Compile_Branch },
+    { "br_if", -1, c_m3Type_none, { op_BranchIf_r, op_BranchIf_s }, Compile_Branch },
+    { "br_table", -1, c_m3Type_none, { op_BranchTable, ((void *)0), ((void *)0), ((void *)0) }, Compile_BranchTable },
+    { "return", 0, (u8)-1, { op_Return, ((void *)0), ((void *)0), ((void *)0) }, Compile_Return },
+    { "call", 0, (u8)-1, { op_Call, ((void *)0), ((void *)0), ((void *)0) }, Compile_Call },
+    { "call_indirect", 0, (u8)-1, { op_CallIndirect, ((void *)0), ((void *)0), ((void *)0) }, Compile_CallIndirect },
+    { "return_call", 0, (u8)-1, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Call },
+    { "return_call_indirect",0, (u8)-1, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_CallIndirect },
+    { "reserved" }, { "reserved" },
+    { "reserved" }, { "reserved" }, { "reserved" }, { "reserved" },
+    { "drop", -1, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Drop },
+    { "select", -2, (u8)-1, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Select },
+    { "reserved" }, { "reserved" }, { "reserved" }, { "reserved" },
+    { "local.get", 1, (u8)-1, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_GetLocal },
+    { "local.set", 1, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_SetLocal },
+    { "local.tee", 0, (u8)-1, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_SetLocal },
+    { "global.get", 1, c_m3Type_none, { op_GetGlobal, ((void *)0), ((void *)0), ((void *)0) }, Compile_GetSetGlobal },
+    { "global.set", 1, c_m3Type_none, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_GetSetGlobal },
+    { "reserved" }, { "reserved" }, { "reserved" },
+    { "i32.load", 0, c_m3Type_i32, { op_i32_Load_i32_r, op_i32_Load_i32_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load", 0, c_m3Type_i64, { op_i64_Load_i64_r, op_i64_Load_i64_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "f32.load", 0, c_m3Type_f32, { op_f32_Load_f32_r, op_f32_Load_f32_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "f64.load", 0, c_m3Type_f64, { op_f64_Load_f64_r, op_f64_Load_f64_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i32.load8_s", 0, c_m3Type_i32, { op_i32_Load_i8_r, op_i32_Load_i8_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i32.load8_u", 0, c_m3Type_i32, { op_i32_Load_u8_r, op_i32_Load_u8_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i32.load16_s", 0, c_m3Type_i32, { op_i32_Load_i16_r, op_i32_Load_i16_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i32.load16_u", 0, c_m3Type_i32, { op_i32_Load_u16_r, op_i32_Load_u16_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load8_s", 0, c_m3Type_i64, { op_i64_Load_i8_r, op_i64_Load_i8_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load8_u", 0, c_m3Type_i64, { op_i64_Load_u8_r, op_i64_Load_u8_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load16_s", 0, c_m3Type_i64, { op_i64_Load_i16_r, op_i64_Load_i16_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load16_u", 0, c_m3Type_i64, { op_i64_Load_u16_r, op_i64_Load_u16_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load32_s", 0, c_m3Type_i64, { op_i64_Load_i32_r, op_i64_Load_i32_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i64.load32_u", 0, c_m3Type_i64, { op_i64_Load_u32_r, op_i64_Load_u32_s, ((void *)0), ((void *)0) }, Compile_Load_Store },
+    { "i32.store", -2, c_m3Type_none, { op_i32_Store_i32_rs, op_i32_Store_i32_sr, op_i32_Store_i32_ss, ((void *)0) }, Compile_Load_Store },
+    { "i64.store", -2, c_m3Type_none, { op_i64_Store_i64_rs, op_i64_Store_i64_sr, op_i64_Store_i64_ss, ((void *)0) }, Compile_Load_Store },
+    { "f32.store", -2, c_m3Type_none, { op_f32_Store_f32_rs, op_f32_Store_f32_sr, op_f32_Store_f32_ss, op_f32_Store_f32_rr }, Compile_Load_Store },
+    { "f64.store", -2, c_m3Type_none, { op_f64_Store_f64_rs, op_f64_Store_f64_sr, op_f64_Store_f64_ss, op_f64_Store_f64_rr }, Compile_Load_Store },
+    { "i32.store8", -2, c_m3Type_none, { op_i32_Store_u8_rs, op_i32_Store_u8_sr, op_i32_Store_u8_ss, ((void *)0) }, Compile_Load_Store },
+    { "i32.store16", -2, c_m3Type_none, { op_i32_Store_i16_rs, op_i32_Store_i16_sr, op_i32_Store_i16_ss, ((void *)0) }, Compile_Load_Store },
+    { "i64.store8", -2, c_m3Type_none, { op_i64_Store_u8_rs, op_i64_Store_u8_sr, op_i64_Store_u8_ss, ((void *)0) }, Compile_Load_Store },
+    { "i64.store16", -2, c_m3Type_none, { op_i64_Store_i16_rs, op_i64_Store_i16_sr, op_i64_Store_i16_ss, ((void *)0) }, Compile_Load_Store },
+    { "i64.store32", -2, c_m3Type_none, { op_i64_Store_i32_rs, op_i64_Store_i32_sr, op_i64_Store_i32_ss, ((void *)0) }, Compile_Load_Store },
+    { "memory.current", 1, c_m3Type_i32, { op_MemCurrent, ((void *)0), ((void *)0), ((void *)0) }, Compile_Memory_Current },
+    { "memory.grow", 1, c_m3Type_i32, { op_MemGrow, ((void *)0), ((void *)0), ((void *)0) }, Compile_Memory_Grow },
+    { "i32.const", 1, c_m3Type_i32, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Const_i32 },
+    { "i64.const", 1, c_m3Type_i64, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Const_i64 },
+    { "f32.const", 1, c_m3Type_f32, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Const_f32 },
+    { "f64.const", 1, c_m3Type_f64, { ((void *)0), ((void *)0), ((void *)0), ((void *)0) }, Compile_Const_f64 },
+    { "i32.eqz", 0, c_m3Type_i32, { op_i32_EqualToZero_r, op_i32_EqualToZero_s, ((void *)0), ((void *)0) } },
+    { "i32.eq", -1, c_m3Type_i32, { op_i32_Equal_rs, ((void *)0), op_i32_Equal_ss, ((void *)0) } },
+    { "i32.ne", -1, c_m3Type_i32, { op_i32_NotEqual_rs, ((void *)0), op_i32_NotEqual_ss, ((void *)0) } },
+    { "i32.lt_s", -1, c_m3Type_i32, { op_i32_LessThan_rs, op_i32_LessThan_sr, op_i32_LessThan_ss, ((void *)0) } },
+    { "i32.lt_u", -1, c_m3Type_i32, { op_u32_LessThan_rs, op_u32_LessThan_sr, op_u32_LessThan_ss, ((void *)0) } },
+    { "i32.gt_s", -1, c_m3Type_i32, { op_i32_GreaterThan_rs, op_i32_GreaterThan_sr, op_i32_GreaterThan_ss, ((void *)0) } },
+    { "i32.gt_u", -1, c_m3Type_i32, { op_u32_GreaterThan_rs, op_u32_GreaterThan_sr, op_u32_GreaterThan_ss, ((void *)0) } },
+    { "i32.le_s", -1, c_m3Type_i32, { op_i32_LessThanOrEqual_rs, op_i32_LessThanOrEqual_sr, op_i32_LessThanOrEqual_ss, ((void *)0) } },
+    { "i32.le_u", -1, c_m3Type_i32, { op_u32_LessThanOrEqual_rs, op_u32_LessThanOrEqual_sr, op_u32_LessThanOrEqual_ss, ((void *)0) } },
+    { "i32.ge_s", -1, c_m3Type_i32, { op_i32_GreaterThanOrEqual_rs, op_i32_GreaterThanOrEqual_sr, op_i32_GreaterThanOrEqual_ss, ((void *)0) } },
+    { "i32.ge_u", -1, c_m3Type_i32, { op_u32_GreaterThanOrEqual_rs, op_u32_GreaterThanOrEqual_sr, op_u32_GreaterThanOrEqual_ss, ((void *)0) } },
+    { "i64.eqz", 0, c_m3Type_i32, { op_i64_EqualToZero_r, op_i64_EqualToZero_s, ((void *)0), ((void *)0) } },
+    { "i64.eq", -1, c_m3Type_i32, { op_i64_Equal_rs, ((void *)0), op_i64_Equal_ss, ((void *)0) } },
+    { "i64.ne", -1, c_m3Type_i32, { op_i64_NotEqual_rs, ((void *)0), op_i64_NotEqual_ss, ((void *)0) } },
+    { "i64.lt_s", -1, c_m3Type_i32, { op_i64_LessThan_rs, op_i64_LessThan_sr, op_i64_LessThan_ss, ((void *)0) } },
+    { "i64.lt_u", -1, c_m3Type_i32, { op_u64_LessThan_rs, op_u64_LessThan_sr, op_u64_LessThan_ss, ((void *)0) } },
+    { "i64.gt_s", -1, c_m3Type_i32, { op_i64_GreaterThan_rs, op_i64_GreaterThan_sr, op_i64_GreaterThan_ss, ((void *)0) } },
+    { "i64.gt_u", -1, c_m3Type_i32, { op_u64_GreaterThan_rs, op_u64_GreaterThan_sr, op_u64_GreaterThan_ss, ((void *)0) } },
+    { "i64.le_s", -1, c_m3Type_i32, { op_i64_LessThanOrEqual_rs, op_i64_LessThanOrEqual_sr, op_i64_LessThanOrEqual_ss, ((void *)0) } },
+    { "i64.le_u", -1, c_m3Type_i32, { op_u64_LessThanOrEqual_rs, op_u64_LessThanOrEqual_sr, op_u64_LessThanOrEqual_ss, ((void *)0) } },
+    { "i64.ge_s", -1, c_m3Type_i32, { op_i64_GreaterThanOrEqual_rs, op_i64_GreaterThanOrEqual_sr, op_i64_GreaterThanOrEqual_ss, ((void *)0) } },
+    { "i64.ge_u", -1, c_m3Type_i32, { op_u64_GreaterThanOrEqual_rs, op_u64_GreaterThanOrEqual_sr, op_u64_GreaterThanOrEqual_ss, ((void *)0) } },
+    { "f32.eq", -1, c_m3Type_i32, { op_f32_Equal_rs, ((void *)0), op_f32_Equal_ss, ((void *)0) } },
+    { "f32.ne", -1, c_m3Type_i32, { op_f32_NotEqual_rs, ((void *)0), op_f32_NotEqual_ss, ((void *)0) } },
+    { "f32.lt", -1, c_m3Type_i32, { op_f32_LessThan_rs, op_f32_LessThan_sr, op_f32_LessThan_ss, ((void *)0) } },
+    { "f32.gt", -1, c_m3Type_i32, { op_f32_GreaterThan_rs, op_f32_GreaterThan_sr, op_f32_GreaterThan_ss, ((void *)0) } },
+    { "f32.le", -1, c_m3Type_i32, { op_f32_LessThanOrEqual_rs, op_f32_LessThanOrEqual_sr, op_f32_LessThanOrEqual_ss, ((void *)0) } },
+    { "f32.ge", -1, c_m3Type_i32, { op_f32_GreaterThanOrEqual_rs, op_f32_GreaterThanOrEqual_sr, op_f32_GreaterThanOrEqual_ss, ((void *)0) } },
+    { "f64.eq", -1, c_m3Type_i32, { op_f64_Equal_rs, ((void *)0), op_f64_Equal_ss, ((void *)0) } },
+    { "f64.ne", -1, c_m3Type_i32, { op_f64_NotEqual_rs, ((void *)0), op_f64_NotEqual_ss, ((void *)0) } },
+    { "f64.lt", -1, c_m3Type_i32, { op_f64_LessThan_rs, op_f64_LessThan_sr, op_f64_LessThan_ss, ((void *)0) } },
+    { "f64.gt", -1, c_m3Type_i32, { op_f64_GreaterThan_rs, op_f64_GreaterThan_sr, op_f64_GreaterThan_ss, ((void *)0) } },
+    { "f64.le", -1, c_m3Type_i32, { op_f64_LessThanOrEqual_rs, op_f64_LessThanOrEqual_sr, op_f64_LessThanOrEqual_ss, ((void *)0) } },
+    { "f64.ge", -1, c_m3Type_i32, { op_f64_GreaterThanOrEqual_rs, op_f64_GreaterThanOrEqual_sr, op_f64_GreaterThanOrEqual_ss, ((void *)0) } },
+    { "i32.clz", 0, c_m3Type_i32, { op_u32_Clz_r, op_u32_Clz_s, ((void *)0), ((void *)0) } },
+    { "i32.ctz", 0, c_m3Type_i32, { op_u32_Ctz_r, op_u32_Ctz_s, ((void *)0), ((void *)0) } },
+    { "i32.popcnt", 0, c_m3Type_i32, { op_u32_Popcnt_r, op_u32_Popcnt_s, ((void *)0), ((void *)0) } },
+    { "i32.add", -1, c_m3Type_i32, { op_i32_Add_rs, ((void *)0), op_i32_Add_ss, ((void *)0) } },
+    { "i32.sub", -1, c_m3Type_i32, { op_i32_Subtract_rs, op_i32_Subtract_sr, op_i32_Subtract_ss, ((void *)0) } },
+    { "i32.mul", -1, c_m3Type_i32, { op_i32_Multiply_rs, ((void *)0), op_i32_Multiply_ss, ((void *)0) } },
+    { "i32.div_s", -1, c_m3Type_i32, { op_i32_Divide_rs, op_i32_Divide_sr, op_i32_Divide_ss, ((void *)0) } },
+    { "i32.div_u", -1, c_m3Type_i32, { op_u32_Divide_rs, op_u32_Divide_sr, op_u32_Divide_ss, ((void *)0) } },
+    { "i32.rem_s", -1, c_m3Type_i32, { op_i32_Remainder_rs, op_i32_Remainder_sr, op_i32_Remainder_ss, ((void *)0) } },
+    { "i32.rem_u", -1, c_m3Type_i32, { op_u32_Remainder_rs, op_u32_Remainder_sr, op_u32_Remainder_ss, ((void *)0) } },
+    { "i32.and", -1, c_m3Type_i32, { op_u64_And_rs, ((void *)0), op_u64_And_ss, ((void *)0) } },
+    { "i32.or", -1, c_m3Type_i32, { op_u64_Or_rs, ((void *)0), op_u64_Or_ss, ((void *)0) } },
+    { "i32.xor", -1, c_m3Type_i32, { op_u64_Xor_rs, ((void *)0), op_u64_Xor_ss, ((void *)0) } },
+    { "i32.shl", -1, c_m3Type_i32, { op_u32_ShiftLeft_rs, op_u32_ShiftLeft_sr, op_u32_ShiftLeft_ss, ((void *)0) } },
+    { "i32.shr_s", -1, c_m3Type_i32, { op_i32_ShiftRight_rs, op_i32_ShiftRight_sr, op_i32_ShiftRight_ss, ((void *)0) } },
+    { "i32.shr_u", -1, c_m3Type_i32, { op_u32_ShiftRight_rs, op_u32_ShiftRight_sr, op_u32_ShiftRight_ss, ((void *)0) } },
+    { "i32.rotl", -1, c_m3Type_i32, { op_u32_Rotl_rs, op_u32_Rotl_sr, op_u32_Rotl_ss, ((void *)0) } },
+    { "i32.rotr", -1, c_m3Type_i32, { op_u32_Rotr_rs, op_u32_Rotr_sr, op_u32_Rotr_ss, ((void *)0) } },
+    { "i64.clz", 0, c_m3Type_i64, { op_u64_Clz_r, op_u64_Clz_s, ((void *)0), ((void *)0) } },
+    { "i64.ctz", 0, c_m3Type_i64, { op_u64_Ctz_r, op_u64_Ctz_s, ((void *)0), ((void *)0) } },
+    { "i64.popcnt", 0, c_m3Type_i64, { op_u64_Popcnt_r, op_u64_Popcnt_s, ((void *)0), ((void *)0) } },
+    { "i64.add", -1, c_m3Type_i64, { op_i64_Add_rs, ((void *)0), op_i64_Add_ss, ((void *)0) } },
+    { "i64.sub", -1, c_m3Type_i64, { op_i64_Subtract_rs, op_i64_Subtract_sr, op_i64_Subtract_ss, ((void *)0) } },
+    { "i64.mul", -1, c_m3Type_i64, { op_i64_Multiply_rs, ((void *)0), op_i64_Multiply_ss, ((void *)0) } },
+    { "i64.div_s", -1, c_m3Type_i64, { op_i64_Divide_rs, op_i64_Divide_sr, op_i64_Divide_ss, ((void *)0) } },
+    { "i64.div_u", -1, c_m3Type_i64, { op_u64_Divide_rs, op_u64_Divide_sr, op_u64_Divide_ss, ((void *)0) } },
+    { "i64.rem_s", -1, c_m3Type_i64, { op_i64_Remainder_rs, op_i64_Remainder_sr, op_i64_Remainder_ss, ((void *)0) } },
+    { "i64.rem_u", -1, c_m3Type_i64, { op_u64_Remainder_rs, op_u64_Remainder_sr, op_u64_Remainder_ss, ((void *)0) } },
+    { "i64.and", -1, c_m3Type_i64, { op_u64_And_rs, ((void *)0), op_u64_And_ss, ((void *)0) } },
+    { "i64.or", -1, c_m3Type_i64, { op_u64_Or_rs, ((void *)0), op_u64_Or_ss, ((void *)0) } },
+    { "i64.xor", -1, c_m3Type_i64, { op_u64_Xor_rs, ((void *)0), op_u64_Xor_ss, ((void *)0) } },
+    { "i64.shl", -1, c_m3Type_i64, { op_u64_ShiftLeft_rs, op_u64_ShiftLeft_sr, op_u64_ShiftLeft_ss, ((void *)0) } },
+    { "i64.shr_s", -1, c_m3Type_i64, { op_i64_ShiftRight_rs, op_i64_ShiftRight_sr, op_i64_ShiftRight_ss, ((void *)0) } },
+    { "i64.shr_u", -1, c_m3Type_i64, { op_u64_ShiftRight_rs, op_u64_ShiftRight_sr, op_u64_ShiftRight_ss, ((void *)0) } },
+    { "i64.rotl", -1, c_m3Type_i64, { op_u64_Rotl_rs, op_u64_Rotl_sr, op_u64_Rotl_ss, ((void *)0) } },
+    { "i64.rotr", -1, c_m3Type_i64, { op_u64_Rotr_rs, op_u64_Rotr_sr, op_u64_Rotr_ss, ((void *)0) } },
+    { "f32.abs", 0, c_m3Type_f32, { op_f32_Abs_r, op_f32_Abs_s, ((void *)0), ((void *)0) } },
+    { "f32.neg", 0, c_m3Type_f32, { op_f32_Negate_r, op_f32_Negate_s, ((void *)0), ((void *)0) } },
+    { "f32.ceil", 0, c_m3Type_f32, { op_f32_Ceil_r, op_f32_Ceil_s, ((void *)0), ((void *)0) } },
+    { "f32.floor", 0, c_m3Type_f32, { op_f32_Floor_r, op_f32_Floor_s, ((void *)0), ((void *)0) } },
+    { "f32.trunc", 0, c_m3Type_f32, { op_f32_Trunc_r, op_f32_Trunc_s, ((void *)0), ((void *)0) } },
+    { "f32.nearest", 0, c_m3Type_f32, { op_f32_Nearest_r, op_f32_Nearest_s, ((void *)0), ((void *)0) } },
+    { "f32.sqrt", 0, c_m3Type_f32, { op_f32_Sqrt_r, op_f32_Sqrt_s, ((void *)0), ((void *)0) } },
+    { "f32.add", -1, c_m3Type_f32, { op_f32_Add_rs, ((void *)0), op_f32_Add_ss, ((void *)0) } },
+    { "f32.sub", -1, c_m3Type_f32, { op_f32_Subtract_rs, op_f32_Subtract_sr, op_f32_Subtract_ss, ((void *)0) } },
+    { "f32.mul", -1, c_m3Type_f32, { op_f32_Multiply_rs, ((void *)0), op_f32_Multiply_ss, ((void *)0) } },
+    { "f32.div", -1, c_m3Type_f32, { op_f32_Divide_rs, op_f32_Divide_sr, op_f32_Divide_ss, ((void *)0) } },
+    { "f32.min", -1, c_m3Type_f32, { op_f32_Min_rs, ((void *)0), op_f32_Min_ss, ((void *)0) } },
+    { "f32.max", -1, c_m3Type_f32, { op_f32_Max_rs, ((void *)0), op_f32_Max_ss, ((void *)0) } },
+    { "f32.copysign", -1, c_m3Type_f32, { op_f32_CopySign_rs, op_f32_CopySign_sr, op_f32_CopySign_ss, ((void *)0) } },
+    { "f64.abs", 0, c_m3Type_f64, { op_f64_Abs_r, op_f64_Abs_s, ((void *)0), ((void *)0) } },
+    { "f64.neg", 0, c_m3Type_f64, { op_f64_Negate_r, op_f64_Negate_s, ((void *)0), ((void *)0) } },
+    { "f64.ceil", 0, c_m3Type_f64, { op_f64_Ceil_r, op_f64_Ceil_s, ((void *)0), ((void *)0) } },
+    { "f64.floor", 0, c_m3Type_f64, { op_f64_Floor_r, op_f64_Floor_s, ((void *)0), ((void *)0) } },
+    { "f64.trunc", 0, c_m3Type_f64, { op_f64_Trunc_r, op_f64_Trunc_s, ((void *)0), ((void *)0) } },
+    { "f64.nearest", 0, c_m3Type_f64, { op_f64_Nearest_r, op_f64_Nearest_s, ((void *)0), ((void *)0) } },
+    { "f64.sqrt", 0, c_m3Type_f64, { op_f64_Sqrt_r, op_f64_Sqrt_s, ((void *)0), ((void *)0) } },
+    { "f64.add", -1, c_m3Type_f64, { op_f64_Add_rs, ((void *)0), op_f64_Add_ss, ((void *)0) } },
+    { "f64.sub", -1, c_m3Type_f64, { op_f64_Subtract_rs, op_f64_Subtract_sr, op_f64_Subtract_ss, ((void *)0) } },
+    { "f64.mul", -1, c_m3Type_f64, { op_f64_Multiply_rs, ((void *)0), op_f64_Multiply_ss, ((void *)0) } },
+    { "f64.div", -1, c_m3Type_f64, { op_f64_Divide_rs, op_f64_Divide_sr, op_f64_Divide_ss, ((void *)0) } },
+    { "f64.min", -1, c_m3Type_f64, { op_f64_Min_rs, ((void *)0), op_f64_Min_ss, ((void *)0) } },
+    { "f64.max", -1, c_m3Type_f64, { op_f64_Max_rs, ((void *)0), op_f64_Max_ss, ((void *)0) } },
+    { "f64.copysign", -1, c_m3Type_f64, { op_f64_CopySign_rs, op_f64_CopySign_sr, op_f64_CopySign_ss, ((void *)0) } },
+    { "i32.wrap/i64", 0, c_m3Type_i32, { op_i32_Wrap_i64_r, op_i32_Wrap_i64_s, ((void *)0), ((void *)0) } },
+    { "i32.trunc_s/f32", 0, c_m3Type_i32, { op_i32_Trunc_f32_r_r, op_i32_Trunc_f32_r_s, op_i32_Trunc_f32_s_r, op_i32_Trunc_f32_s_s }, Compile_Convert },
+    { "i32.trunc_u/f32", 0, c_m3Type_i32, { op_u32_Trunc_f32_r_r, op_u32_Trunc_f32_r_s, op_u32_Trunc_f32_s_r, op_u32_Trunc_f32_s_s }, Compile_Convert },
+    { "i32.trunc_s/f64", 0, c_m3Type_i32, { op_i32_Trunc_f64_r_r, op_i32_Trunc_f64_r_s, op_i32_Trunc_f64_s_r, op_i32_Trunc_f64_s_s }, Compile_Convert },
+    { "i32.trunc_u/f64", 0, c_m3Type_i32, { op_u32_Trunc_f64_r_r, op_u32_Trunc_f64_r_s, op_u32_Trunc_f64_s_r, op_u32_Trunc_f64_s_s }, Compile_Convert },
+    { "i64.extend_s/i32", 0, c_m3Type_i64, { op_i64_Extend_i32_r, op_i64_Extend_i32_s, ((void *)0), ((void *)0) } },
+    { "i64.extend_u/i32", 0, c_m3Type_i64, { op_i64_Extend_u32_r, op_i64_Extend_u32_s, ((void *)0), ((void *)0) } },
+    { "i64.trunc_s/f32", 0, c_m3Type_i64, { op_i64_Trunc_f32_r_r, op_i64_Trunc_f32_r_s, op_i64_Trunc_f32_s_r, op_i64_Trunc_f32_s_s }, Compile_Convert },
+    { "i64.trunc_u/f32", 0, c_m3Type_i64, { op_u64_Trunc_f32_r_r, op_u64_Trunc_f32_r_s, op_u64_Trunc_f32_s_r, op_u64_Trunc_f32_s_s }, Compile_Convert },
+    { "i64.trunc_s/f64", 0, c_m3Type_i64, { op_i64_Trunc_f64_r_r, op_i64_Trunc_f64_r_s, op_i64_Trunc_f64_s_r, op_i64_Trunc_f64_s_s }, Compile_Convert },
+    { "i64.trunc_u/f64", 0, c_m3Type_i64, { op_u64_Trunc_f64_r_r, op_u64_Trunc_f64_r_s, op_u64_Trunc_f64_s_r, op_u64_Trunc_f64_s_s }, Compile_Convert },
+    { "f32.convert_s/i32", 0, c_m3Type_f32, { op_f32_Convert_i32_r_r, op_f32_Convert_i32_r_s, op_f32_Convert_i32_s_r, op_f32_Convert_i32_s_s }, Compile_Convert },
+    { "f32.convert_u/i32", 0, c_m3Type_f32, { op_f32_Convert_u32_r_r, op_f32_Convert_u32_r_s, op_f32_Convert_u32_s_r, op_f32_Convert_u32_s_s }, Compile_Convert },
+    { "f32.convert_s/i64", 0, c_m3Type_f32, { op_f32_Convert_i64_r_r, op_f32_Convert_i64_r_s, op_f32_Convert_i64_s_r, op_f32_Convert_i64_s_s }, Compile_Convert },
+    { "f32.convert_u/i64", 0, c_m3Type_f32, { op_f32_Convert_u64_r_r, op_f32_Convert_u64_r_s, op_f32_Convert_u64_s_r, op_f32_Convert_u64_s_s }, Compile_Convert },
+    { "f32.demote/f64", 0, c_m3Type_f32, { op_f32_Demote_f64_r, op_f32_Demote_f64_s, ((void *)0), ((void *)0) } },
+    { "f64.convert_s/i32", 0, c_m3Type_f64, { op_f64_Convert_i32_r_r, op_f64_Convert_i32_r_s, op_f64_Convert_i32_s_r, op_f64_Convert_i32_s_s }, Compile_Convert },
+    { "f64.convert_u/i32", 0, c_m3Type_f64, { op_f64_Convert_u32_r_r, op_f64_Convert_u32_r_s, op_f64_Convert_u32_s_r, op_f64_Convert_u32_s_s }, Compile_Convert },
+    { "f64.convert_s/i64", 0, c_m3Type_f64, { op_f64_Convert_i64_r_r, op_f64_Convert_i64_r_s, op_f64_Convert_i64_s_r, op_f64_Convert_i64_s_s }, Compile_Convert },
+    { "f64.convert_u/i64", 0, c_m3Type_f64, { op_f64_Convert_u64_r_r, op_f64_Convert_u64_r_s, op_f64_Convert_u64_s_r, op_f64_Convert_u64_s_s }, Compile_Convert },
+    { "f64.promote/f32", 0, c_m3Type_f64, { op_f64_Promote_f32_r, op_f64_Promote_f32_s, ((void *)0), ((void *)0) } },
+    { "i32.reinterpret/f32", 0, c_m3Type_i32, { op_i32_Reinterpret_f32_r_r, op_i32_Reinterpret_f32_r_s, op_i32_Reinterpret_f32_s_r, op_i32_Reinterpret_f32_s_s }, Compile_Convert },
+    { "i64.reinterpret/f64", 0, c_m3Type_i64, { op_i64_Reinterpret_f64_r_r, op_i64_Reinterpret_f64_r_s, op_i64_Reinterpret_f64_s_r, op_i64_Reinterpret_f64_s_s }, Compile_Convert },
+    { "f32.reinterpret/i32", 0, c_m3Type_f32, { op_f32_Reinterpret_i32_r_r, op_f32_Reinterpret_i32_r_s, op_f32_Reinterpret_i32_s_r, op_f32_Reinterpret_i32_s_s }, Compile_Convert },
+    { "f64.reinterpret/i64", 0, c_m3Type_f64, { op_f64_Reinterpret_i64_r_r, op_f64_Reinterpret_i64_r_s, op_f64_Reinterpret_i64_s_r, op_f64_Reinterpret_i64_s_s }, Compile_Convert },
+    { "Const", 0, c_m3Type_none, { op_Const } }, { "Entry", 0, c_m3Type_none, { op_Entry } }, { "Compile", 0, c_m3Type_none, { op_Compile } },
+    { "Bridge", 0, c_m3Type_none, { op_Bridge } }, { "End", 0, c_m3Type_none, { op_End } },
+    { "ContinueLoop", 0, c_m3Type_none, { op_ContinueLoop } }, { "ContinueLoopIf", 0, c_m3Type_none, { op_ContinueLoopIf } },
+    { "CopySlot_32", 0, c_m3Type_none, { op_CopySlot_32 } }, { "PreserveCopySlot_32", 0, c_m3Type_none, { op_PreserveCopySlot_32 } },
+    { "CopySlot_64", 0, c_m3Type_none, { op_CopySlot_64 } }, { "PreserveCopySlot_64", 0, c_m3Type_none, { op_PreserveCopySlot_64 } },
+    { "i32_BranchIf_rs", 0, c_m3Type_none, { op_i32_BranchIf_rs } }, { "i32_BranchIf_ss", 0, c_m3Type_none, { op_i32_BranchIf_ss } }, { "i64_BranchIf_rs", 0, c_m3Type_none, { op_i64_BranchIf_rs } }, { "i64_BranchIf_ss", 0, c_m3Type_none, { op_i64_BranchIf_ss } },
+    { "Select_i32_rss", 0, c_m3Type_none, { op_Select_i32_rss } }, { "Select_i32_srs", 0, c_m3Type_none, { op_Select_i32_srs } }, { "Select_i32_ssr", 0, c_m3Type_none, { op_Select_i32_ssr } }, { "Select_i32_sss", 0, c_m3Type_none, { op_Select_i32_sss } },
+    { "Select_i64_rss", 0, c_m3Type_none, { op_Select_i64_rss } }, { "Select_i64_srs", 0, c_m3Type_none, { op_Select_i64_srs } }, { "Select_i64_ssr", 0, c_m3Type_none, { op_Select_i64_ssr } }, { "Select_i64_sss", 0, c_m3Type_none, { op_Select_i64_sss } },
+    { "Select_f32_sss", 0, c_m3Type_none, { op_Select_f32_sss } }, { "Select_f32_srs", 0, c_m3Type_none, { op_Select_f32_srs } }, { "Select_f32_ssr", 0, c_m3Type_none, { op_Select_f32_ssr } },
+    { "Select_f32_rss", 0, c_m3Type_none, { op_Select_f32_rss } }, { "Select_f32_rrs", 0, c_m3Type_none, { op_Select_f32_rrs } }, { "Select_f32_rsr", 0, c_m3Type_none, { op_Select_f32_rsr } },
+    { "Select_f64_sss", 0, c_m3Type_none, { op_Select_f64_sss } }, { "Select_f64_srs", 0, c_m3Type_none, { op_Select_f64_srs } }, { "Select_f64_ssr", 0, c_m3Type_none, { op_Select_f64_ssr } },
+    { "Select_f64_rss", 0, c_m3Type_none, { op_Select_f64_rss } }, { "Select_f64_rrs", 0, c_m3Type_none, { op_Select_f64_rrs } }, { "Select_f64_rsr", 0, c_m3Type_none, { op_Select_f64_rsr } },
+    { "SetGlobal", 0, c_m3Type_none, { op_SetGlobal_i32, op_SetGlobal_i64, op_SetGlobal_f32, op_SetGlobal_f64, } }, { "SetGlobal_s32", 0, c_m3Type_none, { op_SetGlobal_s32 } }, { "SetGlobal_s64", 0, c_m3Type_none, { op_SetGlobal_s64 } },
+    { "SetRegister", 0, c_m3Type_none, { op_SetRegister_i32, op_SetRegister_i64, op_SetRegister_f32, op_SetRegister_f64, } }, { "SetSlot", 0, c_m3Type_none, { op_SetSlot_i32, op_SetSlot_i64, op_SetSlot_f32, op_SetSlot_f64, } }, { "PreserveSetSlot", 0, c_m3Type_none, { op_PreserveSetSlot_i32, op_PreserveSetSlot_i64, op_PreserveSetSlot_f32, op_PreserveSetSlot_f64, } },
+    { "termination", 0, c_m3Type_void }
 };
 
 M3Result Compile_BlockStatements (IM3Compilation o)
@@ -6644,6 +6766,10 @@ void SetupCompilation (IM3Compilation o)
 
 M3Result Compile_Function (IM3Function io_function)
 {
+    m3log (compile, "compiling: '%s'; wasm-size: %d; numArgs: %d; return: %s",
+           io_function->name, (u32) (io_function->wasmEnd - io_function->wasm),
+           GetFunctionNumArgs (io_function), c_waTypes [GetFunctionReturnType (io_function)]);
+
     M3Result result = m3Err_none;
     IM3Runtime runtime = io_function->module->runtime;
     IM3Compilation o = & runtime->compilation;
@@ -6690,6 +6816,10 @@ M3Result Compile_Function (IM3Function io_function)
         io_function->compiled = pc;
         u32 numConstants = o->constSlotIndex - o->firstConstSlotIndex;
         io_function->numConstants = numConstants;
+
+        m3log (compile, "unique constants: %d; unused slots: %d",
+               numConstants, o->firstSlotIndex - o->constSlotIndex);
+
         if (numConstants) {
             {
                 result = m3Malloc ((void **) & io_function->constants, sizeof (u64) * (numConstants));
